@@ -19,38 +19,33 @@ class _OriginalState extends State<OriginalScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-
           leadingWidth: 1000,
-          leading: TabBar(
+          leading: const TabBar(
             isScrollable: true,
             indicatorColor: Colors.white,
             labelColor: Colors.grey,
             tabs: [
               Tab(text: 'Daily'),
               Tab(text: 'Genres'),
-
             ],
           ),
           actions: [
             IconButton(
-              icon: Icon(Icons.assessment_sharp ),
+              icon: const Icon(Icons.assessment_sharp),
               color: Colors.black,
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.search),
+              icon: const Icon(Icons.search),
               color: Colors.black,
               onPressed: () {},
             )
           ],
           //backgroundColor: Colors.purple,
-
-
         ),
         body: TabBarView(
           children: [
@@ -61,5 +56,4 @@ class _OriginalState extends State<OriginalScreen> {
       ),
     );
   }
-
 }

@@ -19,7 +19,6 @@ class _ForYouState extends State<ForYouScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-
       body: MyBody(),
     );
   }

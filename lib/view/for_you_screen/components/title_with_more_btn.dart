@@ -1,68 +1,58 @@
 import 'package:flutter/material.dart';
 import "dart:math" show pi;
-import '../../../models/products.dart';
 
 class TitleWithMoreBtn extends StatelessWidget {
+  final String text;
+  final Function press;
+
   const TitleWithMoreBtn({
     Key? key,
     required this.text,
     required this.press,
   }) : super(key: key);
-  final String text;
-  final Function press;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 0,
-      ),
+      margin: const EdgeInsets.only(left: 15),
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
       color: Colors.white,
-      child: new InkWell(
+      child: InkWell(
         onTap: () {
-          print("tapwww");
+          print("title row container tapped");
         },
         child: Row(
           children: <Widget>[
-            CustomTextLine(text:text),
-            Spacer(),
-            Transform.rotate(
-              angle: 180 * pi / 180,
-              child: IconButton(
-                icon: Icon(
-                  Icons.arrow_back_ios ,
-                  color: Colors.black,
-                  size: 15,
-                ),
-                onPressed: null,
-              ),
+            customTitle(text),
+            const Spacer(),
+            const Icon(
+              Icons.navigate_next,
+              color: Colors.black,
+              size: 20,
             ),
           ],
         ),
       ),
     );
   }
-}
 
-class CustomTextLine extends StatelessWidget {
-  const CustomTextLine({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(height: 30,
-        child: Align(
-          alignment: Alignment.topLeft,
-          child:Stack(
-            children: <Widget>[
-              Text(text,
-                style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold) ,),
-            ],
-          ),)
+  customTitle(String text) {
+    return SizedBox(
+      height: 30,
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Stack(
+          children: <Widget>[
+            Text(
+              text,
+              style: const TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

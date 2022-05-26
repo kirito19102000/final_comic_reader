@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 
 class Product {
-  final String imageURL, title, description,tag,creators,lastup;
+  final String imageURL, title, description, tag, creators, lastup;
   final int view, size, id;
   final Color color;
   final Function press;
   final double csize;
 
-  Product({
-    required this.id,
-    required this.imageURL,
-    required this.title,
-    required this.view,
-    required this.description,
-    required this.tag,
-    required this.size,
-    required this.color,
-    required this.press,
-    required this.csize,
-    required this.creators,
-    required this.lastup
-
-  });
+  Product(
+      {required this.id,
+      required this.imageURL,
+      required this.title,
+      required this.view,
+      required this.description,
+      required this.tag,
+      required this.size,
+      required this.color,
+      required this.press,
+      required this.csize,
+      required this.creators,
+      required this.lastup});
 }
 
 List<Product> products = [
@@ -33,11 +31,11 @@ List<Product> products = [
       tag: "action",
       description: "dummyText",
       imageURL: "https://cdn-amz.fadoglobal.io/images/I/81r1n+TfLSS.jpg",
-      press: (){},
+      press: () {},
       csize: 0.7,
       creators: "one one",
       lastup: "May 20,2022 ",
-      color: Color(0xFF3D82AE)),
+      color: const Color(0xFF3D82AE)),
   Product(
       id: 2,
       title: "Naruto",
@@ -45,12 +43,13 @@ List<Product> products = [
       size: 8,
       tag: "action",
       description: "dummyText",
-      imageURL: "https://upload.wikimedia.org/wikipedia/vi/c/c7/Naruto_Volume_1_manga_cover.jpg",
-      press: (){},
+      imageURL:
+          "https://upload.wikimedia.org/wikipedia/vi/c/c7/Naruto_Volume_1_manga_cover.jpg",
+      press: () {},
       csize: 0.7,
       creators: "Masashi Kishimoto",
       lastup: "Apr 5,2022 ",
-      color: Color(0xFFD3A984)),
+      color: const Color(0xFFD3A984)),
   Product(
       id: 3,
       title: "Doremon",
@@ -58,12 +57,13 @@ List<Product> products = [
       size: 10,
       tag: "children",
       description: "dummyText",
-      imageURL: "https://cdna.artstation.com/p/assets/images/images/026/941/604/medium/kaustubh-chaudhary-doremon-pink.jpg?1590151532",
-      press: (){},
+      imageURL:
+          "https://cdna.artstation.com/p/assets/images/images/026/941/604/medium/kaustubh-chaudhary-doremon-pink.jpg?1590151532",
+      press: () {},
       csize: 0.7,
       creators: "Fujiko Fujio",
       lastup: "Apr 1,2022 ",
-      color: Color(0xFF989493)),
+      color: const Color(0xFF989493)),
   Product(
       id: 4,
       title: "Old Fashion",
@@ -71,12 +71,13 @@ List<Product> products = [
       size: 11,
       tag: "children",
       description: "dummyText",
-      imageURL: "https://cdna.artstation.com/p/assets/images/images/026/941/604/medium/kaustubh-chaudhary-doremon-pink.jpg?1590151532",
-      press: (){},
+      imageURL:
+          "https://cdna.artstation.com/p/assets/images/images/026/941/604/medium/kaustubh-chaudhary-doremon-pink.jpg?1590151532",
+      press: () {},
       csize: 0.7,
       creators: "Fujiko Fujio",
       lastup: "Apr 1,2022 ",
-      color: Color(0xFFE6B398)),
+      color: const Color(0xFFE6B398)),
   Product(
       id: 5,
       title: "Fairy tail",
@@ -84,12 +85,13 @@ List<Product> products = [
       size: 12,
       tag: "action",
       description: "dummyText",
-      imageURL: "https://upload.wikimedia.org/wikipedia/vi/e/e1/FairyTail-Volume_1_Cover.jpg",
-      press: (){},
+      imageURL:
+          "https://upload.wikimedia.org/wikipedia/vi/e/e1/FairyTail-Volume_1_Cover.jpg",
+      press: () {},
       csize: 0.7,
       creators: "Hiro Mashima",
       lastup: "May 5,2022 ",
-      color: Color(0xFFFB7883)),
+      color: const Color(0xFFFB7883)),
   Product(
       id: 6,
       title: "Fairy tail",
@@ -97,12 +99,13 @@ List<Product> products = [
       size: 12,
       tag: "romantic",
       description: "dummyText",
-      imageURL: "https://upload.wikimedia.org/wikipedia/vi/e/e1/FairyTail-Volume_1_Cover.jpg",
-      press: (){},
+      imageURL:
+          "https://upload.wikimedia.org/wikipedia/vi/e/e1/FairyTail-Volume_1_Cover.jpg",
+      press: () {},
       csize: 0.7,
       creators: "Hiro Mashima",
       lastup: "May 25,2022 ",
-      color: Color(0xFFFB7883)),
+      color: const Color(0xFFFB7883)),
   Product(
       id: 7,
       title: "Kaiju No.8",
@@ -111,11 +114,11 @@ List<Product> products = [
       tag: "action",
       description: "dummyText",
       imageURL: "https://upload.wikimedia.org/wikipedia/en/c/cd/Kaiju_No_8.jpg",
-      press: (){},
+      press: () {},
       csize: 0.7,
       creators: "MATSUMOTO Naoya",
       lastup: "May 14,2022 ",
-      color: Color(0xFFFB7883)),
+      color: const Color(0xFFFB7883)),
   Product(
       id: 8,
       title: "The Beginning Af...",
@@ -123,12 +126,13 @@ List<Product> products = [
       size: 12,
       tag: "action",
       description: "dummyText",
-      imageURL: "https://1.bp.blogspot.com/-2w6LVMWQ_u4/XvB5Au-m5BI/AAAAAAAAAXI/qPfJVpJVaJU8r6NK5xb7c_9n1SE93rbiQCK4BGAsYHg/s1079/100967082_541363706529705_1461401849995970560_n.jpg",
-      press: (){},
+      imageURL:
+          "https://1.bp.blogspot.com/-2w6LVMWQ_u4/XvB5Au-m5BI/AAAAAAAAAXI/qPfJVpJVaJU8r6NK5xb7c_9n1SE93rbiQCK4BGAsYHg/s1079/100967082_541363706529705_1461401849995970560_n.jpg",
+      press: () {},
       csize: 0.7,
       creators: "TurtleMe",
       lastup: "May 3,2022 ",
-      color: Color(0xFFFB7883)),
+      color: const Color(0xFFFB7883)),
   Product(
       id: 9,
       title: "Toaru Majutsu...",
@@ -136,12 +140,13 @@ List<Product> products = [
       size: 12,
       tag: "action",
       description: "dummyText",
-      imageURL: "https://static.wikia.nocookie.net/to-aru-majutsu-no-index/images/f/fe/Movie_Poster2.jpg/revision/latest?cb=20121021190442",
-      press: (){},
+      imageURL:
+          "https://static.wikia.nocookie.net/to-aru-majutsu-no-index/images/f/fe/Movie_Poster2.jpg/revision/latest?cb=20121021190442",
+      press: () {},
       csize: 0.7,
       creators: "Kamachi Kazuma",
       lastup: "May 5,2021 ",
-      color: Color(0xFFFB7883)),
+      color: const Color(0xFFFB7883)),
   Product(
       id: 10,
       title: "bleach",
@@ -149,12 +154,11 @@ List<Product> products = [
       size: 12,
       tag: "romantic",
       description: "dummyText",
-      imageURL: "https://upload.wikimedia.org/wikipedia/en/7/72/Bleachanime.png",
-      press: (){},
+      imageURL:
+          "https://upload.wikimedia.org/wikipedia/en/7/72/Bleachanime.png",
+      press: () {},
       csize: 0.7,
       creators: "Tite Kubo",
       lastup: "May 5,2020 ",
-      color: Color(0xFFFB7883)),
-
-
+      color: const Color(0xFFFB7883)),
 ];

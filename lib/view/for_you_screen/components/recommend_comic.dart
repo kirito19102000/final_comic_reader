@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../models/products.dart';
-import '../../details_screen/main_screen.dart';
+import '../../details_screen/detail_screen.dart';
 
 class ScrollViewRecomedComic extends StatelessWidget {
   const ScrollViewRecomedComic({
@@ -106,7 +106,7 @@ class RecomendComic extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const DetailsScreen()),
+          MaterialPageRoute(builder: (context) => const DetailScreen()),
         );
       },
       child:Container(
