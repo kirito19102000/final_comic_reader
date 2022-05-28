@@ -1,4 +1,4 @@
-import 'package:final_comic_reader/view/for_you_screen/components/comic_carousel.dart';
+import 'comic_carousel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'for_you_screen/for_you_screen.dart';
-import 'originals_screen/originals_screen.dart';
+import 'home_page_screen/home_page_screen.dart';
+import 'category_screen/category_screen.dart';
 import 'canvas_screen/canvas_screen.dart';
 import 'my_screen/my_screen.dart';
 import 'more_screen/more_screen.dart';
@@ -18,7 +18,7 @@ class HomeScreenState extends State<HomepageScreen> {
   int currentTabIndex = 0;
   List<Widget> tabs = [
     ForYouScreen(),
-    OriginalScreen(),
+    CategoryScreen(),
     CanvasScreen(),
     MyScreen(),
     MoreScreen(),

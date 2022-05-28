@@ -14,15 +14,7 @@ class GenresBody extends StatelessWidget {
       child: ListView(
           shrinkWrap: true,
           children: <Widget>[
-            Container(
-              child: Row(
-                children: [
-                  Text("data"),
-                  Spacer(),
-                  Text("data")
-                ],
-              ),
-            ),
+
             GenresGridView(itemNum: products.length)
             
           ]

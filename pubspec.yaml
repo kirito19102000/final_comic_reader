@@ -38,6 +38,9 @@ dependencies:
   carousel_slider: ^4.1.1
   flutter_staggered_grid_view: ^0.6.1
   carousel_pro: ^1.0.0
+  firebase_core: ^1.17.1
+  firebase_auth_oauth: ^1.2.0
+  firebase_database: ^9.0.15
 
 dev_dependencies:
   flutter_test:
