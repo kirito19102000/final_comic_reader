@@ -46,11 +46,11 @@ class HomeScreenState extends State<HomepageScreen> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'FOR YOU',
+          label: 'HOME PAGE',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.grid_view),
-          label: 'ORIGINALS',
+          label: 'CATEGORY',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.auto_stories_outlined),

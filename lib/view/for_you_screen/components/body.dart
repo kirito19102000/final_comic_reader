@@ -9,7 +9,7 @@ import 'title_with_more_btn.dart';
 import '../../../constants.dart';
 import 'new_comic_originals_recomend.dart';
 import 'scroll_view_comic.dart';
-import 'package:carousel_pro/carousel_pro.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:async';
 import '../../details_screen/detail_screen.dart';
@@ -56,13 +56,7 @@ class _MyBodyState extends State<MyBody> {
           Container(
             margin: const EdgeInsets.all(kDefaultPadding / 2),
           ),
-          TitleWithMoreBtn(
-            text: "Daily",
-            press: () {},
-          ),
-          const DailyComicGridView(
-            itemNum: 6,
-          ),
+
           Container(
             margin: const EdgeInsets.all(kDefaultPadding / 2),
           ),
@@ -359,6 +353,13 @@ class _MyBodyState extends State<MyBody> {
           Container(
             margin: const EdgeInsets.all(kDefaultPadding / 2),
           ),
+          TitleWithMoreBtn(
+            text: "Daily",
+            press: () {},
+          ),
+          const DailyComicGridView(
+            itemNum: 9,
+          ),
           const AlignText(
             title: "Genres",
             size: 15,
@@ -389,35 +390,6 @@ class _MyBodyState extends State<MyBody> {
           const AlignText(title: "Looking for something dangeruos?", size: 15),
           Container(
             margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          SizedBox(
-            height: 250.0,
-            width: double.infinity,
-            child: Carousel(
-              dotSize: 6.0,
-              dotSpacing: 15.0,
-              dotPosition: DotPosition.bottomCenter,
-              images: [
-                Image.network(
-                    'https://photo.techrum.vn/images/2022/01/02/doremon-remake-TECHRUM-cover966645bc9366d3aa.jpg',
-                    fit: BoxFit.cover),
-                Image.network(
-                    'https://photo.techrum.vn/images/2022/01/02/doremon-remake-TECHRUM-cover966645bc9366d3aa.jpg',
-                    fit: BoxFit.cover),
-                Image.network(
-                    'https://upload.wikimedia.org/wikipedia/en/7/72/Bleachanime.png',
-                    fit: BoxFit.cover),
-                Image.network(
-                    'https://upload.wikimedia.org/wikipedia/en/7/72/Bleachanime.png',
-                    fit: BoxFit.cover),
-                Image.network(
-                    'https://upload.wikimedia.org/wikipedia/en/7/72/Bleachanime.png',
-                    fit: BoxFit.cover),
-                Image.network(
-                    'https://upload.wikimedia.org/wikipedia/en/7/72/Bleachanime.png',
-                    fit: BoxFit.cover),
-              ],
-            ),
           ),
           Container(
             margin: const EdgeInsets.all(kDefaultPadding / 2),
