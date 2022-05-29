@@ -1,6 +1,7 @@
 import 'dart:async';
+import 'package:final_comic_reader/view/details_screen/components/chapter_list.dart';
+import 'package:final_comic_reader/view/details_screen/components/detail_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'components/body.dart';
 
 class DetailScreen extends StatefulWidget implements PreferredSizeWidget {
   // implements: is to fix the error when Scaffold.appBar calls this class
@@ -19,7 +20,14 @@ class _DetailState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Body(),
+      body: CustomScrollView(
+        slivers: [
+          const DetailAppBar(
+              backgroundImage:
+                  "https://cdn-amz.fadoglobal.io/images/I/81r1n+TfLSS.jpg"),
+          ChapterList()
+        ],
+      ),
     );
   }
 }
