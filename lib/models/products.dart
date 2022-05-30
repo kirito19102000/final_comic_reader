@@ -113,7 +113,7 @@ List<Product> products = [
       size: 12,
       tag: "action",
       description: "dummyText",
-      imageURL: "https://upload.wikimedia.org/wikipedia/en/c/cd/Kaiju_No_8.jpg",
+      imageURL: "http://photruyen.com/376/2/0-376.jpg?r=r8645456",
       press: () {},
       csize: 0.7,
       creators: "MATSUMOTO Naoya",

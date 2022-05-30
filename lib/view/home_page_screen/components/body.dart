@@ -13,25 +13,42 @@ import 'scroll_view_comic.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:async';
 import '../../details_screen/detail_screen.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 class MyBody extends StatefulWidget {
   @override
-  _MyBodyState createState() => _MyBodyState();
+  MyBodyState createState() => MyBodyState();
 }
 
 final List<String> imgUrl = [
-  products[0].imageURL,
-  products[1].imageURL,
-  products[2].imageURL,
-  products[3].imageURL,
 ];
 
-class _MyBodyState extends State<MyBody> {
+
+
+
+
+class MyBodyState extends State<MyBody> {
+  String abc="test";
+
+  final _db =FirebaseDatabase.instance.reference();
+
+
+
   @override
   Widget build(BuildContext context) {
     int _current = 0;
     // int currentIndex = 0;
     Size size = MediaQuery.of(context).size;
+
+    for (var i = 0; i < 10; i++) {
+      _db.child('Comic/'+i.toString()+'/Image').onValue.listen((event) {
+        final String des=event.snapshot.value;
+        imgUrl.add(des);
+
+      });
+    }
 
     return Container(
       width: double.infinity,
@@ -40,12 +57,15 @@ class _MyBodyState extends State<MyBody> {
       child: ListView(
         shrinkWrap: true,
         children: <Widget>[
+
           ComicCarousel(images: imgUrl),
           const Padding(padding: EdgeInsets.only(top: 10)),
           TitleWithMoreBtn(
             text: "My Series",
             press: () {},
           ),
+
+
           SeriesScrollViewComic(size: size),
           const Padding(padding: EdgeInsets.only(top: 10)),
           TitleWithMoreBtn(

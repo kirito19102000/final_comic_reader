@@ -13,8 +13,12 @@ class ComicCarousel extends StatefulWidget {
   }
 }
 
+
+
 class _ComicCarouselState extends State<ComicCarousel> {
-  // int _currentIndex = 0;
+  int _currentIndex = 1;
+  int count=0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +34,17 @@ class _ComicCarouselState extends State<ComicCarousel> {
               viewportFraction: 1.0,
               enlargeCenterPage: false,
               autoPlay: true,
+              onPageChanged: (index,other) async{
+                setState(() {
+                  if(_currentIndex>9){
+                    _currentIndex=1;
+                  }
+                  else  {
+                    _currentIndex++;
+                  }
+
+                });
+              },
               // onPageChanged: (index, other) async {
               //   // _currentIndex = index;
               //   // print(_currentIndex);
@@ -90,11 +105,11 @@ class _ComicCarouselState extends State<ComicCarousel> {
   }
 
   paging() {
-    return const AspectRatio(
+    return  AspectRatio(
       aspectRatio: 2.0,
       child: Align(
         alignment: Alignment.bottomRight,
-        child: Text("1/12"),
+        child: Text(_currentIndex.toString()+'/10',style: TextStyle(fontSize:18,fontWeight: FontWeight.bold),),
       ),
     );
   }
