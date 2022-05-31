@@ -17,15 +17,15 @@ class LoginAppBar extends StatelessWidget implements PreferredSizeWidget {
             TextStyle(color: Colors.grey.shade600, fontWeight: FontWeight.bold),
       ),
       centerTitle: true,
-      // leading: IconButton(
-      //   icon: Icon(
-      //     Icons.close,
-      //     color: Colors.grey.shade600,
-      //   ),
-      //   onPressed: () {
-      //     Navigator.pop(context);
-      //   },
-      // ),
+      leading: IconButton(
+        icon: Icon(
+          Icons.close,
+          color: Colors.grey.shade600,
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 }

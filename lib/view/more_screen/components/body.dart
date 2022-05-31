@@ -1,95 +1,149 @@
-import 'package:flutter/cupertino.dart';
+import 'package:final_comic_reader/shared/firebase_authentication.dart';
+import 'package:final_comic_reader/view/login_screen/login_screen.dart';
+import 'package:final_comic_reader/view/more_screen/components/icon_button_group.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
-import 'title_with_more_btn.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  const Body({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _MoreBodyState();
+  }
+}
+
+class _MoreBodyState extends State<Body> {
+  late String username;
+  late FirebaseAuth auth;
+  late FirebaseAuthentication _authentication;
+
+  @override
+  void initState() {
+    Firebase.initializeApp().whenComplete(() {
+      _authentication = FirebaseAuthentication();
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    // _authentication = FirebaseAuthentication();
+    auth = FirebaseAuth.instance;
+    username = auth.currentUser?.email ?? 'Anonymous';
 
     return Container(
       color: Colors.white,
-      child: ListView(
-        shrinkWrap: true,
+      child: Column(
+        // shrinkWrap: true,
         children: [
-
-
           Container(
             height: 100,
-
-            margin: EdgeInsets.only(left: kDefaultPadding/2,
-            right: kDefaultPadding/2),
+            color: Colors.black26,
+            margin: const EdgeInsets.only(bottom: 20),
+            // height: 200,
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
               children: [
-                Column(
-                  children: [
-                    Text("💲 0\nPurchased 0     Free 0")
-                  ],
+                Container(
+                  margin: const EdgeInsets.only(left: 20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        username,
+                        style: const TextStyle(fontSize: 20),
+                        softWrap: true,
+                        textAlign: TextAlign.start,
+                      ),
+                      Text(username == 'Anonymous'
+                          ? 'Not logged in'
+                          : 'Logged in'),
+                    ],
+                  ),
                 ),
-                Spacer(),
-                TextButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.greenAccent)),
-                  onPressed: () {},
-                  child: const Text('Buy Coins',style: TextStyle(color: Colors.white),),
-                ),
+                const Spacer(),
+                dynamicButton(context),
+                const Padding(
+                  padding: EdgeInsets.only(right: 20),
+                )
               ],
             ),
           ),
-      Container(
-        margin: EdgeInsets.only(left: kDefaultPadding*2,right: kDefaultPadding*2),
-        child: Row(children: [
-        GestureDetector(
-          onTap: (){
-            print("on tap");
-          },
-          child: Column(
-            children: [
-              Icon(Icons.search,color: Colors.black,size: 40,),
-              Text("Search",)
+          operationsRow(),
+        ],
+      ),
+    );
+  }
 
-            ],
+  dynamicButton(BuildContext context) {
+    return TextButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.greenAccent),
+      ),
+      onPressed: () {
+        if (username == 'Anonymous') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginScreen(),
+            ),
+          );
+        } else {
+          setState(() {
+            username = 'Anonymous';
+          });
+          _authentication.logout();
+        }
+      },
+      child: Text(
+        username == 'Anonymous' ? 'Login' : 'Logout',
+        style: const TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+  operationsRow() {
+    return Container(
+      margin: const EdgeInsets.only(
+        left: kDefaultPadding * 2,
+        right: kDefaultPadding * 2,
+      ),
+      child: Row(
+        children: const [
+          IconButtonGroup(
+            name: 'Search',
+            icon: Icons.search,
           ),
-        ),
-        Spacer(),
-        GestureDetector(
-          onTap: (){
-            print("on tap");
-          },
-          child: Column(
-            children: [
-              Icon(Icons.settings,color: Colors.black,size: 40,),
-              Text("Settings",)
-
-            ],
+          Spacer(),
+          IconButtonGroup(
+            name: 'Settings',
+            icon: Icons.settings,
           ),
-        ),
-        Spacer(),
-        GestureDetector(
-          onTap: (){
-            print("on tap");
-          },
-          child: Column(
-            children: [
-              Icon(Icons.change_circle,color: Colors.black,size: 40,),
-              Text("Fan Translation",)
-
-            ],
+          Spacer(),
+          IconButtonGroup(
+            name: 'Fan Translation',
+            icon: Icons.change_circle,
           ),
-        ),
-
-      ],),),
-          Container(margin: EdgeInsets.all(kDefaultPadding/2),),
-          Container(margin: EdgeInsets.only(left: kDefaultPadding),
-            child: Row(children: [
-              TitleWithMoreBtn(text: "Notice  > ", press: (){}),
-              TitleWithMoreBtn(text: " mxmxtoon't Brass & Sass Music Video", press: (){})
-            ],))
-
         ],
       ),
     );
   }
 }
+
+// Container(
+//   margin: EdgeInsets.only(left: kDefaultPadding),
+//   child: Row(
+//     children: [
+//       TitleWithMoreBtn(text: "Notice  > ", press: () {}),
+//       TitleWithMoreBtn(
+//           text: " mxmxtoon't Brass & Sass Music Video", press: () {})
+//     ],
+//   ),
+// )
