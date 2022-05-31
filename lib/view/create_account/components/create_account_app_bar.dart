@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LoginAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const LoginAppBar({Key? key}) : super(key: key);
+class CreateAccountAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CreateAccountAppBar({Key? key}) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(100);
@@ -12,20 +12,20 @@ class LoginAppBar extends StatelessWidget implements PreferredSizeWidget {
       shadowColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       title: Text(
-        'Log in',
+        'Create your account',
         style:
             TextStyle(color: Colors.grey.shade600, fontWeight: FontWeight.bold),
       ),
       centerTitle: true,
-      // leading: IconButton(
-      //   icon: Icon(
-      //     Icons.close,
-      //     color: Colors.grey.shade600,
-      //   ),
-      //   onPressed: () {
-      //     Navigator.pop(context);
-      //   },
-      // ),
+      leading: IconButton(
+        icon: Icon(
+          Icons.close,
+          color: Colors.grey.shade600,
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 }

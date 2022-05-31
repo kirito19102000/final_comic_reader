@@ -1,6 +1,6 @@
 import 'package:final_comic_reader/shared/firebase_authentication.dart';
 import 'package:final_comic_reader/view/login_screen/components/skip_button.dart';
-import 'package:final_comic_reader/view/login_screen/components/forgot_password.dart';
+import 'package:final_comic_reader/view/login_screen/components/create_account.dart';
 import 'package:final_comic_reader/view/login_screen/components/google_button.dart';
 import 'package:final_comic_reader/view/login_screen/components/login_button.dart';
 import 'package:final_comic_reader/view/login_screen/components/policy_text.dart';
@@ -29,11 +29,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    super.initState();
     Firebase.initializeApp().whenComplete(() {
       auth = FirebaseAuthentication();
       setState(() {});
     });
+    super.initState();
   }
 
   @override
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // Container(margin: const EdgeInsets.only(top: 10)),
             LoginButton(auth, emailController, passwordController),
             Container(margin: const EdgeInsets.only(top: 10)),
-            ForgotPassword(),
+            CreateAccount(),
             bottomDisplay(),
           ],
         ),

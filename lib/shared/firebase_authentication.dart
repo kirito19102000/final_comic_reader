@@ -37,15 +37,15 @@ class FirebaseAuthentication {
 
   Future<String?> loginWithGoogle() async {
     final GoogleSignInAccount? googleSignInAccount =
-    await googleSignIn.signIn();
+        await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
-    await googleSignInAccount!.authentication;
+        await googleSignInAccount!.authentication;
     final AuthCredential authCredential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
     );
     final UserCredential authResult =
-    await _firebaseAuth.signInWithCredential(authCredential);
+        await _firebaseAuth.signInWithCredential(authCredential);
     final User? user = authResult.user;
     if (user != null) {
       return '$user';

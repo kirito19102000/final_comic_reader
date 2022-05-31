@@ -5,6 +5,7 @@ class GoogleButton extends StatefulWidget {
   final FirebaseAuthentication auth;
 
   const GoogleButton(this.auth, {Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return GoogleButtonState();
@@ -44,8 +45,9 @@ class GoogleButtonState extends State<GoogleButton> {
           style: ElevatedButton.styleFrom(
             primary: Colors.white,
             elevation: 5,
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
         ),
       ),
@@ -62,7 +64,6 @@ class GoogleButtonState extends State<GoogleButton> {
       } else {
         setState(() {
           print('Google good: $value');
-
           // _message = 'User $value successfully logged in with Google';
         });
       }
