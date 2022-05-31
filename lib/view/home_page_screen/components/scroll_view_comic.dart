@@ -94,7 +94,7 @@ class ViewComic extends StatelessWidget {
         // TODO: link to correct detail screen
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const DetailScreen()),
+          MaterialPageRoute(builder: (context) => const DetailScreen(idimg: "0"),),
         );
       },
       child: Container(

@@ -33,21 +33,23 @@ class MyBodyState extends State<MyBody> {
   String abc="test";
 
   final _db =FirebaseDatabase.instance.reference();
+  int _currentIndex = 0;
+  int count=0;
 
 
 
   @override
   Widget build(BuildContext context) {
-    int _current = 0;
-    // int currentIndex = 0;
     Size size = MediaQuery.of(context).size;
 
     for (var i = 0; i < 10; i++) {
       _db.child('Comic/'+i.toString()+'/Image').onValue.listen((event) {
         final String des=event.snapshot.value;
-        imgUrl.add(des);
-
+        if (imgUrl.contains(des)==false){
+          imgUrl.add(des);
+        }
       });
+
     }
 
     return Container(
@@ -59,11 +61,14 @@ class MyBodyState extends State<MyBody> {
         children: <Widget>[
 
           ComicCarousel(images: imgUrl),
+
+
           const Padding(padding: EdgeInsets.only(top: 10)),
           TitleWithMoreBtn(
             text: "My Series",
             press: () {},
           ),
+
 
 
           SeriesScrollViewComic(size: size),
@@ -104,8 +109,8 @@ class MyBodyState extends State<MyBody> {
                     autoPlay: false,
                     onPageChanged: (index, other) {
                       setState(() {
-                        _current = index;
-                        print(_current);
+                        _currentIndex = index;
+                        print(_currentIndex);
                       });
                     },
                   ),
@@ -129,7 +134,7 @@ class MyBodyState extends State<MyBody> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const DetailScreen()),
+                                            const DetailScreen(idimg: "0"),),
                                   );
                                 },
                                 child: Container(
@@ -200,7 +205,7 @@ class MyBodyState extends State<MyBody> {
                         enlargeCenterPage: true,
                         autoPlay: true,
                         onPageChanged: (index, other) {
-                          _current = index;
+                          _currentIndex = index;
                           setState(() {});
                         },
                       ),
@@ -218,7 +223,7 @@ class MyBodyState extends State<MyBody> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const DetailScreen()),
+                                                const DetailScreen(idimg: "0"),),
                                       );
                                     }));
                           },

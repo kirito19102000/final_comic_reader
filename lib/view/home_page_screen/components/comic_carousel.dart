@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ComicCarousel extends StatefulWidget {
   final List<String> images;
 
-  const ComicCarousel({required this.images, Key? key}) : super(key: key);
+  ComicCarousel({required this.images, Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -16,8 +16,11 @@ class ComicCarousel extends StatefulWidget {
 
 
 class _ComicCarouselState extends State<ComicCarousel> {
-  int _currentIndex = 1;
+
+  int _currentIndex = 0;
   int count=0;
+  List <int> num=[1,2,3,4,5,6,7,8,9,10];
+
 
 
   @override
@@ -36,13 +39,8 @@ class _ComicCarouselState extends State<ComicCarousel> {
               autoPlay: true,
               onPageChanged: (index,other) async{
                 setState(() {
-                  if(_currentIndex>9){
-                    _currentIndex=1;
-                  }
-                  else  {
-                    _currentIndex++;
-                  }
 
+                  _currentIndex=index;
                 });
               },
               // onPageChanged: (index, other) async {
@@ -69,16 +67,17 @@ class _ComicCarouselState extends State<ComicCarousel> {
   banner(String image) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 5.0),
+      margin: EdgeInsets.symmetric(horizontal: 5.0),
       child: GestureDetector(
         child: Image.network(image, fit: BoxFit.fill),
         onTap: () {
+
           Navigator.push(
             context,
             MaterialPageRoute(
               // TODO correct linking to each detail page
               // get comic id and detail screen receives id
-              builder: (context) => const DetailScreen(),
+              builder: (context) => DetailScreen(idimg: (num[_currentIndex]-1).toString()),
             ),
           );
         },
@@ -109,7 +108,7 @@ class _ComicCarouselState extends State<ComicCarousel> {
       aspectRatio: 2.0,
       child: Align(
         alignment: Alignment.bottomRight,
-        child: Text(_currentIndex.toString()+'/10',style: TextStyle(fontSize:18,fontWeight: FontWeight.bold),),
+        child: Text(num[_currentIndex].toString()+'/'+widget.images.length.toString(),style: TextStyle(fontSize:18,fontWeight: FontWeight.bold),),
       ),
     );
   }

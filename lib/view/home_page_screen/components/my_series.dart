@@ -94,7 +94,7 @@ class SeriesViewComic extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const DetailScreen()),
+          MaterialPageRoute(builder: (context) => const DetailScreen(idimg: "0"),),
         );
       },
       child: Container(
