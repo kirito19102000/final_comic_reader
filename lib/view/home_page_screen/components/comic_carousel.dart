@@ -14,7 +14,6 @@ class ComicCarousel extends StatefulWidget {
 }
 
 
-
 class _ComicCarouselState extends State<ComicCarousel> {
 
   int _currentIndex = 0;
@@ -23,8 +22,11 @@ class _ComicCarouselState extends State<ComicCarousel> {
 
 
 
+
   @override
   Widget build(BuildContext context) {
+
+
     return SizedBox(
       height: 200,
       child: Stack(

@@ -22,8 +22,7 @@ class MyBody extends StatefulWidget {
   MyBodyState createState() => MyBodyState();
 }
 
-final List<String> imgUrl = [
-];
+
 
 
 
@@ -33,6 +32,8 @@ class MyBodyState extends State<MyBody> {
   String abc="test";
 
   final _db =FirebaseDatabase.instance.reference();
+
+
   int _currentIndex = 0;
   int count=0;
 
@@ -40,14 +41,14 @@ class MyBodyState extends State<MyBody> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> imgUrl = [
+    ];
     Size size = MediaQuery.of(context).size;
 
     for (var i = 0; i < 10; i++) {
       _db.child('Comic/'+i.toString()+'/Image').onValue.listen((event) {
         final String des=event.snapshot.value;
-        if (imgUrl.contains(des)==false){
-          imgUrl.add(des);
-        }
+        imgUrl.add(des);
       });
 
     }
@@ -77,6 +78,36 @@ class MyBodyState extends State<MyBody> {
             text: "New WEBTOON ORIGINALS",
             press: () {},
           ),
+
+          //ElevatedButton(onPressed: (){
+
+
+            //_db.child('Comic/0/Chapters').onValue.listen((event) {
+             // List<Object?> allO=event.snapshot.value;
+              //setState(() {
+               // print(allO.length);
+
+             // });
+
+          //  });
+
+        //  }, child: Text("up")),
+
+          //ElevatedButton(onPressed: (){
+
+
+            //_db.child('Comic/0/Chapters/0/Links').onValue.listen((event) {
+              //final testall=Map<dynamic, dynamic>.from(event.snapshot.value);
+              //List<Object?> testall=event.snapshot.value;
+              //setState(() {
+                //print(testall.length);
+
+              //});
+
+           // });
+
+          //}, child: Text("up")),
+
           ScrollViewRecomedNewComic(size: size),
           Container(
             margin: const EdgeInsets.all(kDefaultPadding / 2),

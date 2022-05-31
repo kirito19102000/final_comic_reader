@@ -20,6 +20,7 @@ class DetailScreen extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _DetailState extends State<DetailScreen> {
+
   final _db =FirebaseDatabase.instance.reference();
   String imgurl="https://cdn-amz.fadoglobal.io/images/I/81r1n+TfLSS.jpg";
 
