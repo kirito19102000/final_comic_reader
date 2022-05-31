@@ -1,16 +1,23 @@
 import 'package:final_comic_reader/view/comic_screen/comic_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../models/products.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 class ChapterList extends StatelessWidget {
   // final int chapterNumber;
   List<String>? names;
   List<String>? images;
+  String idComic;
+  final _db =FirebaseDatabase.instance.reference();
 
-  ChapterList({Key? key, this.names, this.images}) : super(key: key);
+  ChapterList({Key? key, this.names, this.images,required this.idComic}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {

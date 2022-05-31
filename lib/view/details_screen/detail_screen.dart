@@ -40,7 +40,7 @@ class _DetailState extends State<DetailScreen> {
            DetailAppBar(
               backgroundImage:
                  imgurl),
-          ChapterList()
+          ChapterList(idComic: imgurl,)
         ],
       ),
     );

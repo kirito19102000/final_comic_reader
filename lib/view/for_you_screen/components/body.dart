@@ -29,6 +29,8 @@ class MyBody extends StatefulWidget {
 
 
 class MyBodyState extends State<MyBody> {
+
+
   String abc="test";
 
   final _db =FirebaseDatabase.instance.reference();
@@ -41,17 +43,18 @@ class MyBodyState extends State<MyBody> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> imgUrl = [
-    ];
+
     Size size = MediaQuery.of(context).size;
+    List<String> imgUrl = [
+    ];
 
     for (var i = 0; i < 10; i++) {
       _db.child('Comic/'+i.toString()+'/Image').onValue.listen((event) {
         final String des=event.snapshot.value;
         imgUrl.add(des);
       });
-
     }
+
 
     return Container(
       width: double.infinity,
@@ -61,7 +64,7 @@ class MyBodyState extends State<MyBody> {
         shrinkWrap: true,
         children: <Widget>[
 
-          ComicCarousel(images: imgUrl),
+          ComicCarousel(images: imgUrl,numComic: 10,),
 
 
           const Padding(padding: EdgeInsets.only(top: 10)),

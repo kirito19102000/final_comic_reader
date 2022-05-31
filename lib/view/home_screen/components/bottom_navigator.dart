@@ -21,7 +21,7 @@ class BottomNavigator extends StatelessWidget {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'HOME',
+          label: 'FOR YOU',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.grid_view),
