@@ -3,52 +3,85 @@ import 'package:flutter/material.dart';
 import '../../../models/products.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
-final _db =FirebaseDatabase.instance.reference();
 
-List <String> ChapterName=[];
+
+
 List <String> ChapterImg=[];
+List <String> ChapterName=[];
+
+
+
 int count=0;
 int numChapter=15;
 
-class ChapterList extends StatelessWidget {
-  // final int chapterNumber;
-  List<String>? names;
-  List<String>? images;
+class ChapterList extends StatefulWidget {
   String idComic;
-
-
 
 
   ChapterList({Key? key, required this.idComic}) : super(key: key);
 
+  @override
+  State<StatefulWidget> createState() {
+    return _ChapterList();
+  }
+}
 
+
+class _ChapterList extends State< ChapterList> {
+  // final int chapterNumber;
+  List<String>? names;
+  List<String>? images;
+
+  final _db =FirebaseDatabase.instance.reference();
 
   @override
   Widget build(BuildContext context) {
 
-    _db.child('Comic/'+idComic+'/Chapters').onValue.listen((event) {
+    final List <String> NameList=[];
+    final List <String> ImgList=[];
+
+    _db.child('Comic/'+widget.idComic+'/Chapters').onValue.listen((event) {
       List <Object?> listChapter=event.snapshot.value;
         numChapter=listChapter.length;
 
     });
+
+    for(var i=0;i<numChapter;i++){
+      _db.child('Comic/'+widget.idComic+'/Chapters/'+i.toString()+'/Name').onValue.listen((event) {
+        final String listChapter=event.snapshot.value;
+        NameList.add(listChapter);
+        ChapterName=NameList;
+      });
+
+    }
+    for(var i=0;i<numChapter;i++){
+      _db.child('Comic/'+widget.idComic+'/Chapters/'+i.toString()+'/Links/0').onValue.listen((event) {
+        final String listChapter=event.snapshot.value;
+        ImgList.add(listChapter);
+        ChapterImg=ImgList;
+      });
+    }
+
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           return GestureDetector(
               onTap: () {
-                print(numChapter);
+                setState(() {
+                  count=index;
+                });
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ComicScreen(
-                            images: [],
+                      builder: (context) => ComicScreen(
+                            idChapter: count.toString(),idComic: widget.idComic,
                           )),
                 );
               },
               //products[index].imageURL
               // if images and names list are null default mock is generated
-              child: chapterTile(index, images?[index], names?[index]));
+              child: chapterTile(index, ChapterImg[index], ChapterName[index]));
         },
         childCount: numChapter, // 1000 list items
       ),

@@ -17,16 +17,12 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 
+
+
 class MyBody extends StatefulWidget {
   @override
   MyBodyState createState() => MyBodyState();
 }
-
-
-
-
-
-
 
 class MyBodyState extends State<MyBody> {
 
@@ -34,7 +30,6 @@ class MyBodyState extends State<MyBody> {
   String abc="test";
 
   final _db =FirebaseDatabase.instance.reference();
-
 
   int _currentIndex = 0;
   int count=0;
@@ -77,14 +72,15 @@ class MyBodyState extends State<MyBody> {
             text: "My Series",
             press: () {},
           ),
-
-
-
           SeriesScrollViewComic(size: size),
           const Padding(padding: EdgeInsets.only(top: 10)),
+
           TitleWithMoreBtn(
-            text: "New WEBTOON ORIGINALS",
+            text: "Daily",
             press: () {},
+          ),
+          DailyComicGridView(
+            itemNum: 9,
           ),
 
           //ElevatedButton(onPressed: (){
@@ -416,13 +412,6 @@ class MyBodyState extends State<MyBody> {
           ScrollViewComic(size: size),
           Container(
             margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          TitleWithMoreBtn(
-            text: "Daily",
-            press: () {},
-          ),
-          const DailyComicGridView(
-            itemNum: 9,
           ),
           const AlignText(
             title: "Genres",

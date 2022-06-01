@@ -71,10 +71,6 @@ class DailyComicRecomend extends StatelessWidget {
                                 style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 10),
                               ),
 
-                              TextSpan(
-                                text: "♥ "+products[index].view.toString(),
-                                style: TextStyle(color: Colors.green,fontSize: 10),
-                              ),
                             ]
                         )
                     )
