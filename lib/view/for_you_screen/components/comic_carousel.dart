@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:final_comic_reader/view/details_screen/detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +26,16 @@ final _db =FirebaseDatabase.instance.reference();
 class _ComicCarouselState extends State<ComicCarousel> {
 
   int _currentIndex = 0;
+  late int numComicDb;
+  late int randomId;
+
+  List <int> idComic=[];
+
+
   int count=0;
+  List<String> imgUrl = [
+  ];
+
 
 
 
@@ -33,11 +44,44 @@ class _ComicCarouselState extends State<ComicCarousel> {
   @override
   Widget build(BuildContext context) {
 
+    _db.child('Comic').onValue.listen((event) {
+      List <Object?> listComic=event.snapshot.value;
+      numComicDb=listComic.length;
 
-    List <int> num=[];
-    for (var i = 0; i < widget.numComic; i++) {
-      num.add(i+1);
+    });
+
+
+
+
+    while (idComic.length<widget.numComic){
+      randomId=Random().nextInt(17);
+      if(idComic.contains(randomId)==false){
+        idComic.add(randomId);
+      }
     }
+
+
+    //if (imgUrl.length<widget.numComic){
+      //for (var i = 0; i < idComic.length; i++) {
+       // _db.child('Comic/'+idComic[i].toString()+'/Image').onValue.listen((event) {
+         //final String des=event.snapshot.value;
+          //imgUrl.add(des);
+       // });
+      //}
+    //}
+
+    if (imgUrl.length<widget.numComic){
+      for (var i = 0; i < idComic.length; i++) {
+        _db.child('Comic/'+i.toString()+'/Image').onValue.listen((event) {
+          final String des=event.snapshot.value;
+          imgUrl.add(des);
+        });
+      }
+    }
+
+
+
+
 
 
     return SizedBox(
@@ -63,7 +107,7 @@ class _ComicCarouselState extends State<ComicCarousel> {
               //   // setState(() {});
               // },
             ),
-            items: widget.images.map<Widget>((image) {
+            items: imgUrl.map((image) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
@@ -78,7 +122,7 @@ class _ComicCarouselState extends State<ComicCarousel> {
                           MaterialPageRoute(
                             // TODO correct linking to each detail page
                             // get comic id and detail screen receives id
-                            builder: (context) => DetailScreen(idimg: (num[_currentIndex]-1).toString()),
+                            builder: (context) => DetailScreen(idimg: _currentIndex.toString()),
                           ),
                         );
                       },
@@ -107,7 +151,7 @@ class _ComicCarouselState extends State<ComicCarousel> {
             aspectRatio: 2.0,
             child: Align(
               alignment: Alignment.bottomRight,
-              child: Text(num[_currentIndex].toString()+'/'+widget.images.length.toString(),style: TextStyle(fontSize:18,fontWeight: FontWeight.bold),),
+              child: Text((_currentIndex+1).toString()+'/'+widget.images.length.toString(),style: TextStyle(fontSize:18,fontWeight: FontWeight.bold),),
             ),
           ),
         ],

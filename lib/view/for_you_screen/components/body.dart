@@ -38,6 +38,9 @@ class MyBodyState extends State<MyBody> {
 
   int _currentIndex = 0;
   int count=0;
+  List<String> imgUrl = [
+  ];
+
 
 
 
@@ -45,15 +48,16 @@ class MyBodyState extends State<MyBody> {
   Widget build(BuildContext context) {
 
     Size size = MediaQuery.of(context).size;
-    List<String> imgUrl = [
-    ];
-
-    for (var i = 0; i < 10; i++) {
-      _db.child('Comic/'+i.toString()+'/Image').onValue.listen((event) {
-        final String des=event.snapshot.value;
-        imgUrl.add(des);
-      });
+    if (imgUrl.length<10){
+      for (var i = 0; i < 10; i++) {
+        _db.child('Comic/'+i.toString()+'/Image').onValue.listen((event) {
+          final String des=event.snapshot.value;
+          imgUrl.add(des);
+        });
+      }
     }
+
+
 
 
     return Container(
@@ -63,6 +67,7 @@ class MyBodyState extends State<MyBody> {
       child: ListView(
         shrinkWrap: true,
         children: <Widget>[
+
 
           ComicCarousel(images: imgUrl,numComic: 10,),
 
@@ -93,19 +98,19 @@ class MyBodyState extends State<MyBody> {
              // });
 
           //  });
-
-        //  }, child: Text("up")),
+          //  }, child: Text("up")),
 
           //ElevatedButton(onPressed: (){
 
 
-            //_db.child('Comic/0/Chapters/0/Links').onValue.listen((event) {
-              //final testall=Map<dynamic, dynamic>.from(event.snapshot.value);
-              //List<Object?> testall=event.snapshot.value;
-              //setState(() {
-                //print(testall.length);
+          //_db.child('Comic/0/Chapters/0/Links').onValue.listen((event) {
+          //final testall=Map<dynamic, dynamic>.from(event.snapshot.value);
+          //List<Object?> testall=event.snapshot.value;
+          //setState(() {
+          //print(testall.length);
 
-              //});
+          //});
+
 
            // });
 
@@ -569,6 +574,8 @@ class MyBodyState extends State<MyBody> {
       ),
     );
   }
+
+
 }
 
 class GemresWidget extends StatelessWidget {
@@ -645,6 +652,8 @@ class GemresWidget extends StatelessWidget {
       ),
     );
   }
+
+
 }
 
 class TextGestureDetector extends StatelessWidget {

@@ -3,27 +3,41 @@ import 'package:flutter/material.dart';
 import '../../../models/products.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+final _db =FirebaseDatabase.instance.reference();
 
+List <String> ChapterName=[];
+List <String> ChapterImg=[];
+int count=0;
+int numChapter=15;
 
 class ChapterList extends StatelessWidget {
   // final int chapterNumber;
   List<String>? names;
   List<String>? images;
   String idComic;
-  final _db =FirebaseDatabase.instance.reference();
 
-  ChapterList({Key? key, this.names, this.images,required this.idComic}) : super(key: key);
+
+
+
+  ChapterList({Key? key, required this.idComic}) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
 
+    _db.child('Comic/'+idComic+'/Chapters').onValue.listen((event) {
+      List <Object?> listChapter=event.snapshot.value;
+        numChapter=listChapter.length;
+
+    });
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           return GestureDetector(
               onTap: () {
-                print("chapter clicked");
+                print(numChapter);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -36,7 +50,7 @@ class ChapterList extends StatelessWidget {
               // if images and names list are null default mock is generated
               child: chapterTile(index, images?[index], names?[index]));
         },
-        childCount: 10, // 1000 list items
+        childCount: numChapter, // 1000 list items
       ),
     );
   }
