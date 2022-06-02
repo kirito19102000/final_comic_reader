@@ -45,7 +45,7 @@ class DailyComicRecomend extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const DetailScreen(idimg: "0"),),
+            MaterialPageRoute(builder: (context) => const DetailScreen(idimg: "0",Emty: false,),),
           );
         },
         child:Container(

@@ -23,11 +23,13 @@ class ComicCarousel extends StatefulWidget {
 final _db =FirebaseDatabase.instance.reference();
 
 
+
 class _ComicCarouselState extends State<ComicCarousel> {
 
   int _currentIndex = 0;
   late int numComicDb;
   late int randomId;
+  bool Emty=false;
 
   List <int> idComic=[];
 
@@ -77,12 +79,12 @@ class _ComicCarouselState extends State<ComicCarousel> {
                 setState(() {
                   _currentIndex=index;
                 });
+                _db.child('Comic/'+_currentIndex.toString()+'/Chapters').onValue.listen((event) {
+                  final bool des=event.snapshot.value==null;
+                  Emty=des;
+                });
               },
-              // onPageChanged: (index, other) async {
-              //   // _currentIndex = index;
-              //   // print(_currentIndex);
-              //   // setState(() {});
-              // },
+
             ),
             items: imgUrl.map((image) {
               return Builder(
@@ -93,12 +95,15 @@ class _ComicCarouselState extends State<ComicCarousel> {
                     child: GestureDetector(
                       child: Image.network(image, fit: BoxFit.fill),
                       onTap: () {
+                        setState(() {
+
+                        });
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             // TODO correct linking to each detail page
                             // get comic id and detail screen receives id
-                            builder: (context) => DetailScreen(idimg: _currentIndex.toString()),
+                            builder: (context) => DetailScreen(idimg: _currentIndex.toString(),Emty: Emty,),
                           ),
                         );
                       },

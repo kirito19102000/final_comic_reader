@@ -5,12 +5,14 @@ import '../../../models/products.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+final _db =FirebaseDatabase.instance.reference();
 
-List <String> ChapterImg=[];
-List <String> ChapterName=[];
 
 int count=0;
 int numChapter=15;
+
+
+
 
 
 class ChapterList extends StatefulWidget {
@@ -22,32 +24,33 @@ class ChapterList extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _ChapterList();
+
+    if(Emty){
+      return _EmtyChapterList();
+    }
+    else{
+      return _ChapterList();
+    }
+
   }
 }
 
-
 class _ChapterList extends State< ChapterList> {
+
   // final int chapterNumber;
   List<String>? names;
   List<String>? images;
   List <Object?> ListImg=[];
   String? NameChapter;
   bool? Emty;
+  List <String> ChapterImg=[];
+  List <String> ChapterName=[];
 
-
-
-  final _db =FirebaseDatabase.instance.reference();
 
   @override
   Widget build(BuildContext context) {
-
-
-    final List <String> NameList=[];
-    final List <String> ImgList=[];
-
-    print(widget.Emty);
-
+    List <String> NameList=[];
+    List <String> ImgList=[];
 
 
     _db.child('Comic/'+widget.idComic+'/Chapters').onValue.listen((event) {
@@ -55,21 +58,33 @@ class _ChapterList extends State< ChapterList> {
         numChapter=listChapter.length;
     });
 
-    for(var i=0;i<numChapter;i++){
-      _db.child('Comic/'+widget.idComic+'/Chapters/'+i.toString()+'/Name').onValue.listen((event) {
-        final String listChapter=event.snapshot.value;
-        NameList.add(listChapter);
-        ChapterName=NameList;
-      });
+    if(ChapterImg.length<numChapter){
+      for(var i=0;i<numChapter;i++){
+        String test="";
+        _db.child('Comic/'+widget.idComic+'/Chapters/'+i.toString()+'/Links/0').onValue.listen((event) {
+          if(event.snapshot.value!=null){
+            final String listChapter=event.snapshot.value;
+            test=listChapter;
+            ChapterImg.add(test);
+          }
+        });
+      }
+    }
 
+    if(ChapterName.length<numChapter){
+      for(var i=0;i<numChapter;i++){
+        _db.child('Comic/'+widget.idComic+'/Chapters/'+i.toString()+'/Name').onValue.listen((event) {
+          if(event.snapshot.value!=null){
+            final String listChapter=event.snapshot.value;
+            NameList.add(listChapter);
+            ChapterName=NameList;
+          }
+        });
+      }
     }
-    for(var i=0;i<numChapter;i++){
-      _db.child('Comic/'+widget.idComic+'/Chapters/'+i.toString()+'/Links/0').onValue.listen((event) {
-        final String listChapter=event.snapshot.value;
-        ImgList.add(listChapter);
-        ChapterImg=ImgList;
-      });
-    }
+
+
+
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
@@ -82,7 +97,6 @@ class _ChapterList extends State< ChapterList> {
                     ListImg=listChapter;
                   });
                 });
-
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -141,3 +155,26 @@ class _ChapterList extends State< ChapterList> {
     );
   }
 }
+
+class _EmtyChapterList extends State<ChapterList>{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return SliverFixedExtentList(
+      itemExtent: 50,
+      delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+          return Container(
+            alignment: Alignment.center,
+            child: Text('Comming soon',
+            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+          );
+        },
+        childCount: 1
+      ),
+    );
+  }
+
+
+}
+

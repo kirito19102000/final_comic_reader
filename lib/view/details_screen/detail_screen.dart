@@ -5,13 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+final _db =FirebaseDatabase.instance.reference();
+
+
+
 class DetailScreen extends StatefulWidget implements PreferredSizeWidget {
   final String idimg;
+  final bool Emty;
+
   // implements: is to fix the error when Scaffold.appBar calls this class
-  const DetailScreen({required this.idimg ,Key? key}) : super(key: key);
+  const DetailScreen({required this.idimg,required this.Emty ,Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
+
     return _DetailState();
   }
 
@@ -20,14 +27,19 @@ class DetailScreen extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _DetailState extends State<DetailScreen> {
-  bool Emty=true;
 
-  final _db =FirebaseDatabase.instance.reference();
+
+
+
   String imgurl="https://cdn-amz.fadoglobal.io/images/I/81r1n+TfLSS.jpg";
 
 
   @override
   Widget build(BuildContext context) {
+
+
+
+
     _db.child('Comic/'+widget.idimg+'/Image').onValue.listen((event) {
       String des=event.snapshot.value;
       setState(() {
@@ -41,7 +53,8 @@ class _DetailState extends State<DetailScreen> {
           DetailAppBar(
               backgroundImage:
               imgurl),
-          ChapterList(idComic: widget.idimg,Emty: Emty,)
+          ChapterList(idComic: widget.idimg,Emty: widget.Emty,),
+
         ],
       ),
     );

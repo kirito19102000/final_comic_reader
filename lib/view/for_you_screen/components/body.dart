@@ -47,6 +47,7 @@ class MyBodyState extends State<MyBody> {
         _db.child('Comic/'+i.toString()+'/Image').onValue.listen((event) {
           final String des=event.snapshot.value;
           imgUrl.add(des);
+
         });
       }
     }
@@ -157,7 +158,7 @@ class MyBodyState extends State<MyBody> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const DetailScreen(idimg: "0"),),
+                                            const DetailScreen(idimg: "0",Emty: false,),),
                                   );
                                 },
                                 child: Container(
@@ -246,7 +247,7 @@ class MyBodyState extends State<MyBody> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const DetailScreen(idimg: "0"),),
+                                                const DetailScreen(idimg: "0",Emty: false,),),
                                       );
                                     }));
                           },
