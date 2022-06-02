@@ -32,8 +32,8 @@ class _DetailState extends State<DetailScreen> {
       setState(() {
         imgurl=des;
       });
-
     });
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [

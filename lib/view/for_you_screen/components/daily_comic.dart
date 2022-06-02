@@ -20,7 +20,7 @@ class DailyComicGridView extends StatelessWidget {
         itemCount: itemNum,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,mainAxisSpacing: 5,crossAxisSpacing: 5,childAspectRatio: 2/3),
         itemBuilder: (context,index){
-          return DailyComicRecomend(index: index,tag: products[index].tag,title: products[index].title,view: products[index].view,);
+          return DailyComicRecomend(index: index,tag: products[index].tag,title: products[index].title);
         },
         scrollDirection: Axis.vertical,
       ),
@@ -33,10 +33,10 @@ class DailyComicRecomend extends StatelessWidget {
     Key? key,
     required this.tag,
     required this.title,
-    required this.view,
+
     required this.index
   }) : super(key: key);
-  final int index,view;
+  final int index;
   final String tag,title;
 
   @override

@@ -1,21 +1,10 @@
 import 'package:final_comic_reader/view/comic_screen/components/comic_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_core/firebase_core.dart';
-
-
-
-List<Object?> images = [
-];
-int numImg=15;
-List <Object?> ThisChapterImg=[];
 
 class ComicScreen extends StatefulWidget {
+  final List<Object?>? images;
 
-  final String idChapter;
-  final String idComic;
-
-  ComicScreen({Key? key, required this.idChapter,required this.idComic}) : super(key: key);
+  const ComicScreen({Key? key, this.images}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -25,18 +14,18 @@ class ComicScreen extends StatefulWidget {
 
 class _ComicScreenState extends State<ComicScreen> {
   bool _showAppBar = true;
-  final _db =FirebaseDatabase.instance.reference();
 
   @override
   Widget build(BuildContext context) {
-    List <Object?>  ImgList=[];
-
-    _db.child('Comic/'+widget.idComic+'/Chapters/'+widget.idChapter+'/Links').onValue.listen((event) {
-      List listChapter=event.snapshot.value;
-      images=listChapter;
-
-    });
-
+    List<Object?> images = widget.images ?? [];
+    if (widget.images?.length == 0) {
+      // if there is none or empty images data, mock with this
+      images = [
+        'http://tintruyen.net/12279/fix-8/6.jpg?gf=hdfgdfg',
+        'http://tintruyen.net/12279/fix-8/6.jpg?gf=hdfgdfg',
+        'http://tintruyen.net/12279/fix-8/6.jpg?gf=hdfgdfg'
+      ];
+    }
 
     return Scaffold(
       appBar: _showAppBar ? ComicAppBar() : null,

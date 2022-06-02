@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 List <String> ChapterImg=[];
 List <String> ChapterName=[];
+List <Object?> ListImg=[];
 
 
 
@@ -39,6 +40,7 @@ class _ChapterList extends State< ChapterList> {
 
     final List <String> NameList=[];
     final List <String> ImgList=[];
+    final List <Object?> ImginChapList=[];
 
     _db.child('Comic/'+widget.idComic+'/Chapters').onValue.listen((event) {
       List <Object?> listChapter=event.snapshot.value;
@@ -63,19 +65,25 @@ class _ChapterList extends State< ChapterList> {
     }
 
 
+
+
+
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           return GestureDetector(
               onTap: () {
                 setState(() {
-                  count=index;
+                  _db.child('Comic/'+widget.idComic+'/Chapters/'+index.toString()+'/Links').onValue.listen((event) {
+                    List <Object?> listChapter=event.snapshot.value;
+                    ListImg=listChapter;
+                  });
                 });
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => ComicScreen(
-                            idChapter: count.toString(),idComic: widget.idComic,
+                            images: ListImg,
                           )),
                 );
               },

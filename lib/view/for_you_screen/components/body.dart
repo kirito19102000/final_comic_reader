@@ -76,7 +76,7 @@ class MyBodyState extends State<MyBody> {
           const Padding(padding: EdgeInsets.only(top: 10)),
 
           TitleWithMoreBtn(
-            text: "Daily",
+            text: "Comic",
             press: () {},
           ),
           DailyComicGridView(
