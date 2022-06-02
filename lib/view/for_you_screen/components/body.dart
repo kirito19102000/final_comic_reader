@@ -64,7 +64,7 @@ class MyBodyState extends State<MyBody> {
         children: <Widget>[
 
 
-          ComicCarousel(images: imgUrl,numComic: 10,),
+          ComicCarousel(numComic: 10,),
 
 
           const Padding(padding: EdgeInsets.only(top: 10)),
@@ -293,126 +293,7 @@ class MyBodyState extends State<MyBody> {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding),
-          ),
-          const TextGestureDetector(
-            toptext: "Exiciting Stories on CANVS",
-            bottomtext: "Series from out Self-Publishing Creators",
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          const AlignText(
-            title: "Staff Picks",
-            size: 15,
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          ScrollViewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          const AlignText(
-            title: "Hidden Gems",
-            size: 15,
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          ScrollViewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          const AlignText(
-            title: "Today's Hot Series",
-            size: 15,
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          ScrollViewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          const AlignText(
-            title: "Romance",
-            size: 15,
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          ScrollViewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          const AlignText(
-            title: "Rising Stars",
-            size: 15,
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          ScrollViewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          const AlignText(
-            title: "Drama",
-            size: 15,
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          ScrollViewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          const AlignText(
-            title: "Comedy/Slice-of-Life",
-            size: 15,
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          ScrollViewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          const AlignText(
-            title: "Epic Adventures",
-            size: 15,
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          ScrollViewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          const AlignText(
-            title: "Spotlight",
-            size: 15,
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          ScrollViewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          const AlignText(
-            title: "Binge-worthy Series",
-            size: 15,
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          ScrollViewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
+
           const AlignText(
             title: "Genres",
             size: 15,
@@ -421,79 +302,13 @@ class MyBodyState extends State<MyBody> {
           Container(
             margin: const EdgeInsets.all(kDefaultPadding / 2),
           ),
-          const Text(
-            "Find your series",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          GestureDetector(
-            onTap: () {
-              print("Click event on Container");
-            },
-            child: Card(
-                elevation: 2,
-                child: Image.network(
-                  "https://photo.techrum.vn/images/2022/01/02/doremon-remake-TECHRUM-cover966645bc9366d3aa.jpg",
-                  fit: BoxFit.fitWidth,
-                  height: 60,
-                )),
-          ),
-          const AlignText(title: "Looking for something dangeruos?", size: 15),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 4),
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          TitleWithMoreBtn(
-            text: "Daily",
-            press: () {},
-          ),
-          TitleWithMoreBtn(
-            text: "Ranking",
-            press: () {},
-          ),
-          TitleWithMoreBtn(
-            text: "Genres",
-            press: () {},
-          ),
-          TitleWithMoreBtn(
-            text: "Fan Translation",
-            press: () {},
-          ),
+
+
           TitleWithMoreBtn(
             text: "Setting",
             press: () {},
           ),
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "__________________________________________________________",
-              style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          TitleWithMoreBtn(
-            text: "Notice",
-            press: () {},
-          ),
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "asdadasd",
-              style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey),
-            ),
-          ),
+
           Container(
             margin: const EdgeInsets.all(kDefaultPadding / 2),
           ),
@@ -553,7 +368,7 @@ class MyBodyState extends State<MyBody> {
                 print("Click event on Container");
               },
               child: const Text(
-                "Sahre WEBTOON",
+                "Share WEBTOON",
                 style: const TextStyle(
                     color: Colors.black, fontWeight: FontWeight.bold),
               ),

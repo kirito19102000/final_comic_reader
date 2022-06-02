@@ -8,11 +8,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ComicCarousel extends StatefulWidget {
-  final List<String> images;
+
   int numComic;
 
 
-  ComicCarousel({required this.images,required this.numComic, Key? key}) : super(key: key);
+  ComicCarousel({required this.numComic, Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -36,11 +36,6 @@ class _ComicCarouselState extends State<ComicCarousel> {
   List<String> imgUrl = [
   ];
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -57,16 +52,6 @@ class _ComicCarouselState extends State<ComicCarousel> {
       }
     }
 
-
-    //if (imgUrl.length<widget.numComic){
-      //for (var i = 0; i < idComic.length; i++) {
-       // _db.child('Comic/'+idComic[i].toString()+'/Image').onValue.listen((event) {
-         //final String des=event.snapshot.value;
-          //imgUrl.add(des);
-       // });
-      //}
-    //}
-
     if (imgUrl.length<widget.numComic){
       for (var i = 0; i < idComic.length; i++) {
         _db.child('Comic/'+i.toString()+'/Image').onValue.listen((event) {
@@ -75,11 +60,6 @@ class _ComicCarouselState extends State<ComicCarousel> {
         });
       }
     }
-
-
-
-
-
 
     return SizedBox(
       height: 200,
@@ -113,7 +93,6 @@ class _ComicCarouselState extends State<ComicCarousel> {
                     child: GestureDetector(
                       child: Image.network(image, fit: BoxFit.fill),
                       onTap: () {
-
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -148,7 +127,7 @@ class _ComicCarouselState extends State<ComicCarousel> {
             aspectRatio: 2.0,
             child: Align(
               alignment: Alignment.bottomRight,
-              child: Text((_currentIndex+1).toString()+'/'+widget.images.length.toString(),style: TextStyle(fontSize:18,fontWeight: FontWeight.bold),),
+              child: Text((_currentIndex+1).toString()+'/'+widget.numComic.toString(),style: TextStyle(fontSize:18,fontWeight: FontWeight.bold),),
             ),
           ),
         ],
