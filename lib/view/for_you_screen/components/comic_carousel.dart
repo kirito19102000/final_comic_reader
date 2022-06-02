@@ -47,10 +47,7 @@ class _ComicCarouselState extends State<ComicCarousel> {
     _db.child('Comic').onValue.listen((event) {
       List <Object?> listComic=event.snapshot.value;
       numComicDb=listComic.length;
-
     });
-
-
 
 
     while (idComic.length<widget.numComic){

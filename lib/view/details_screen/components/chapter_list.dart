@@ -1,5 +1,6 @@
 import 'package:final_comic_reader/view/comic_screen/comic_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../models/products.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,7 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 List <String> ChapterImg=[];
 List <String> ChapterName=[];
-List <Object?> ListImg=[];
+
 
 
 
@@ -32,6 +33,8 @@ class _ChapterList extends State< ChapterList> {
   // final int chapterNumber;
   List<String>? names;
   List<String>? images;
+  List <Object?> ListImg=[];
+  String? NameChapter;
 
   final _db =FirebaseDatabase.instance.reference();
 
@@ -40,7 +43,7 @@ class _ChapterList extends State< ChapterList> {
 
     final List <String> NameList=[];
     final List <String> ImgList=[];
-    final List <Object?> ImginChapList=[];
+
 
     _db.child('Comic/'+widget.idComic+'/Chapters').onValue.listen((event) {
       List <Object?> listChapter=event.snapshot.value;
@@ -79,11 +82,12 @@ class _ChapterList extends State< ChapterList> {
                     ListImg=listChapter;
                   });
                 });
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => ComicScreen(
-                            images: ListImg,
+                            images: ListImg,NameChapter: ChapterName[index],
                           )),
                 );
               },

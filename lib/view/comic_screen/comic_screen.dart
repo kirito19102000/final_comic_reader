@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class ComicScreen extends StatefulWidget {
   final List<Object?>? images;
+  final String NameChapter;
 
-  const ComicScreen({Key? key, this.images}) : super(key: key);
+  const ComicScreen({Key? key,required this.images,required this.NameChapter}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -28,7 +29,7 @@ class _ComicScreenState extends State<ComicScreen> {
     }
 
     return Scaffold(
-      appBar: _showAppBar ? ComicAppBar() : null,
+      appBar: _showAppBar ? ComicAppBar(name: widget.NameChapter,) : null,
       body: GestureDetector(
         onTap: () => setState(() {
           _showAppBar = !_showAppBar;
