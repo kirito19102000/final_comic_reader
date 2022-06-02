@@ -9,7 +9,6 @@ import 'title_with_more_btn.dart';
 import '../../../constants.dart';
 import 'new_comic_originals_recomend.dart';
 import 'scroll_view_comic.dart';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:async';
 import '../../details_screen/detail_screen.dart';
@@ -83,18 +82,7 @@ class MyBodyState extends State<MyBody> {
             itemNum: 9,
           ),
 
-          //ElevatedButton(onPressed: (){
 
-
-            //_db.child('Comic/0/Chapters').onValue.listen((event) {
-             // List<Object?> allO=event.snapshot.value;
-              //setState(() {
-               // print(allO.length);
-
-             // });
-
-          //  });
-          //  }, child: Text("up")),
 
           //ElevatedButton(onPressed: (){
 

@@ -20,6 +20,7 @@ class DetailScreen extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _DetailState extends State<DetailScreen> {
+  bool Emty=true;
 
   final _db =FirebaseDatabase.instance.reference();
   String imgurl="https://cdn-amz.fadoglobal.io/images/I/81r1n+TfLSS.jpg";
@@ -37,10 +38,10 @@ class _DetailState extends State<DetailScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-           DetailAppBar(
+          DetailAppBar(
               backgroundImage:
-                 imgurl),
-          ChapterList(idComic: widget.idimg,)
+              imgurl),
+          ChapterList(idComic: widget.idimg,Emty: Emty,)
         ],
       ),
     );

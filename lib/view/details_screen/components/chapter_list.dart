@@ -6,21 +6,19 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 
-
 List <String> ChapterImg=[];
 List <String> ChapterName=[];
-
-
-
 
 int count=0;
 int numChapter=15;
 
+
 class ChapterList extends StatefulWidget {
   String idComic;
+  final bool Emty;
 
 
-  ChapterList({Key? key, required this.idComic}) : super(key: key);
+  ChapterList({Key? key, required this.idComic,required this.Emty}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -35,20 +33,26 @@ class _ChapterList extends State< ChapterList> {
   List<String>? images;
   List <Object?> ListImg=[];
   String? NameChapter;
+  bool? Emty;
+
+
 
   final _db =FirebaseDatabase.instance.reference();
 
   @override
   Widget build(BuildContext context) {
 
+
     final List <String> NameList=[];
     final List <String> ImgList=[];
+
+    print(widget.Emty);
+
 
 
     _db.child('Comic/'+widget.idComic+'/Chapters').onValue.listen((event) {
       List <Object?> listChapter=event.snapshot.value;
         numChapter=listChapter.length;
-
     });
 
     for(var i=0;i<numChapter;i++){
@@ -66,10 +70,6 @@ class _ChapterList extends State< ChapterList> {
         ChapterImg=ImgList;
       });
     }
-
-
-
-
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
