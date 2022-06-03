@@ -23,18 +23,6 @@ class _CategoryState extends State<CategoryScreen> {
         backgroundColor: Colors.white,
 
 
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.assessment_sharp),
-            color: Colors.black,
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.search),
-            color: Colors.black,
-            onPressed: () {},
-          )
-        ],
         //backgroundColor: Colors.purple,
       ),
       body: GenresComic(),
