@@ -9,10 +9,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ComicCarousel extends StatefulWidget {
 
+  ComicCarousel({
+    required this.numComic,
+    Key? key}) : super(key: key);
+
   int numComic;
-
-
-  ComicCarousel({required this.numComic, Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -54,9 +55,10 @@ class _ComicCarouselState extends State<ComicCarousel> {
       }
     }
 
+
     if (imgUrl.length<widget.numComic){
       for (var i = 0; i < idComic.length; i++) {
-        _db.child('Comic/'+i.toString()+'/Image').onValue.listen((event) {
+        _db.child('Comic/'+idComic[i].toString()+'/Image').onValue.listen((event) {
           final String des=event.snapshot.value;
           imgUrl.add(des);
         });
@@ -79,7 +81,7 @@ class _ComicCarouselState extends State<ComicCarousel> {
                 setState(() {
                   _currentIndex=index;
                 });
-                _db.child('Comic/'+_currentIndex.toString()+'/Chapters').onValue.listen((event) {
+                _db.child('Comic/'+idComic[_currentIndex].toString()+'/Chapters').onValue.listen((event) {
                   final bool des=event.snapshot.value==null;
                   Emty=des;
                 });
@@ -103,7 +105,7 @@ class _ComicCarouselState extends State<ComicCarousel> {
                           MaterialPageRoute(
                             // TODO correct linking to each detail page
                             // get comic id and detail screen receives id
-                            builder: (context) => DetailScreen(idimg: _currentIndex.toString(),Emty: Emty,),
+                            builder: (context) => DetailScreen(idimg: idComic[_currentIndex].toString(),Emty: Emty,),
                           ),
                         );
                       },

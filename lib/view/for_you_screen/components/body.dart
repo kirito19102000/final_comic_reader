@@ -15,12 +15,21 @@ import '../../details_screen/detail_screen.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-
+final _db =FirebaseDatabase.instance.reference();
+List<String> imgUrl = [
+];
+List<String> tagComic=[];
+List<String> nameComic=[];
+List<bool> hasChapter=[];
+int numComicDb=0;
 
 
 class MyBody extends StatefulWidget {
   @override
-  MyBodyState createState() => MyBodyState();
+
+  MyBodyState createState() {
+   return MyBodyState();}
+
 }
 
 class MyBodyState extends State<MyBody> {
@@ -28,12 +37,9 @@ class MyBodyState extends State<MyBody> {
 
   String abc="test";
 
-  final _db =FirebaseDatabase.instance.reference();
 
   int _currentIndex = 0;
   int count=0;
-  List<String> imgUrl = [
-  ];
 
 
 
@@ -42,15 +48,58 @@ class MyBodyState extends State<MyBody> {
   Widget build(BuildContext context) {
 
     Size size = MediaQuery.of(context).size;
-    if (imgUrl.length<10){
-      for (var i = 0; i < 10; i++) {
+    _db.child('Comic').onValue.listen((event) {
+      List <Object?> listComic=event.snapshot.value;
+      numComicDb=listComic.length;
+      setState(() {
+      });
+
+    });
+
+
+    if (imgUrl.length<numComicDb.toInt()){
+      for (var i = 0; i < numComicDb.toInt(); i++) {
         _db.child('Comic/'+i.toString()+'/Image').onValue.listen((event) {
           final String des=event.snapshot.value;
           imgUrl.add(des);
 
+
         });
       }
     }
+    if (tagComic.length<numComicDb){
+      for (var i = 0; i < numComicDb; i++) {
+        _db.child('Comic/'+i.toString()+'/Category/0').onValue.listen((event) {
+          final String des=event.snapshot.value;
+          tagComic.add(des);
+
+        });
+      }
+    }
+
+    if (nameComic.length<numComicDb){
+      for (var i = 0; i < numComicDb; i++) {
+        _db.child('Comic/'+i.toString()+'/Name').onValue.listen((event) {
+          final String des=event.snapshot.value;
+          nameComic.add(des);
+
+
+        });
+      }
+    }
+
+    if (hasChapter.length<numComicDb){
+      for (var i = 0; i < numComicDb; i++) {
+        _db.child('Comic/'+i.toString()+'/Chapters').onValue.listen((event) {
+          final bool des=event.snapshot.value==null;
+          hasChapter.add(des);
+
+        });
+      }
+    }
+
+
+
 
 
 
@@ -80,7 +129,8 @@ class MyBodyState extends State<MyBody> {
             press: () {},
           ),
           DailyComicGridView(
-            itemNum: 9,
+            imgURL: imgUrl,tag: tagComic,name: nameComic,
+            itemNum: 9,Emty: hasChapter,
           ),
 
 
