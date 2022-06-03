@@ -14,14 +14,11 @@ import 'dart:async';
 import '../../details_screen/detail_screen.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+import '../../home_screen/home_screen.dart';
+import 'search_screen.dart';
 
-final _db =FirebaseDatabase.instance.reference();
-List<String> imgUrl = [
-];
-List<String> tagComic=[];
-List<String> nameComic=[];
-List<bool> hasChapter=[];
-int numComicDb=0;
+final _db =  FirebaseDatabase.instance.reference();
+
 
 
 class MyBody extends StatefulWidget {
@@ -33,6 +30,13 @@ class MyBody extends StatefulWidget {
 }
 
 class MyBodyState extends State<MyBody> {
+  List<String> imgUrl = [
+  ];
+  List<String> tagComic=[];
+  List<String> nameComic=[];
+  List<bool> hasChapter=[];
+  int numComicDb=17;
+  int cot=0;
 
 
   String abc="test";
@@ -42,10 +46,10 @@ class MyBodyState extends State<MyBody> {
   int count=0;
 
 
-
-
   @override
   Widget build(BuildContext context) {
+
+
 
     Size size = MediaQuery.of(context).size;
     _db.child('Comic').onValue.listen((event) {
@@ -55,6 +59,8 @@ class MyBodyState extends State<MyBody> {
       });
 
     });
+
+
 
 
     if (imgUrl.length<numComicDb.toInt()){
@@ -113,7 +119,7 @@ class MyBodyState extends State<MyBody> {
         children: <Widget>[
 
 
-          ComicCarousel(numComic: 10,),
+          ComicCarousel(numComic: 10,hasChapter: hasChapter,Name: nameComic,imgURL: imgUrl,),
 
 
           const Padding(padding: EdgeInsets.only(top: 10)),
@@ -360,8 +366,15 @@ class MyBodyState extends State<MyBody> {
                   color: Colors.black,
                   size: 40,
                 ),
-                tooltip: 'Search',
-                onPressed: () {},
+
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                      const DetailScreen(idimg: "0",Emty: false,),),
+                  );
+                },
               ),
               const Spacer(),
               IconButton(
@@ -370,7 +383,7 @@ class MyBodyState extends State<MyBody> {
                   color: Colors.black,
                   size: 40,
                 ),
-                tooltip: 'Search',
+
                 onPressed: () {},
               ),
               const Spacer(),
@@ -380,7 +393,7 @@ class MyBodyState extends State<MyBody> {
                   color: Colors.black,
                   size: 40,
                 ),
-                tooltip: 'Search',
+
                 onPressed: () {},
               ),
               const Spacer(),
@@ -390,7 +403,7 @@ class MyBodyState extends State<MyBody> {
                   color: Colors.black,
                   size: 40,
                 ),
-                tooltip: 'Search',
+
                 onPressed: () {},
               ),
             ],

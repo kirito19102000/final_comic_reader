@@ -1,17 +1,23 @@
 import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:final_comic_reader/view/details_screen/detail_screen.dart';
+import '../../details_screen/detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'search_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ComicCarousel extends StatefulWidget {
 
   ComicCarousel({
+    required this.Name,
+    required this.hasChapter,
     required this.numComic,
+    required this.imgURL,
     Key? key}) : super(key: key);
+  List<bool> hasChapter;
+  List <String> Name,imgURL;
 
   int numComic;
 
@@ -126,7 +132,17 @@ class _ComicCarouselState extends State<ComicCarousel> {
                   size: 40,
                 ),
                 tooltip: 'Search',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      // TODO correct linking to each detail page
+                      // get comic id and detail screen receives id
+                      builder: (context) => SearchScreen(imgURL: widget.imgURL,NameComic: widget.Name,Emty: widget.hasChapter,),
+                    ),
+                  );
+
+                },
               ),
             ),
           ),
@@ -141,5 +157,6 @@ class _ComicCarouselState extends State<ComicCarousel> {
       ),
     );
   }
-
+  
 }
+

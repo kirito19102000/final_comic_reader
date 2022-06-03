@@ -30,7 +30,7 @@ class _GenresBody extends State<GenresBody>{
   List<String> imgUrl = [];
   List<String> nameComic=[];
   List<bool> hasChapter=[];
-  int numComicDb=0;
+  int numComicDb=17;
 
   @override
   Widget build(BuildContext context) {
