@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SignUpInputField extends StatefulWidget {
+  final TextEditingController nameController;
   final TextEditingController emailController;
   final TextEditingController passwordController;
-  const SignUpInputField(this.emailController, this.passwordController, {Key? key}) : super(key: key);
+  const SignUpInputField(this.nameController, this.emailController, this.passwordController, {Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -20,10 +21,31 @@ class SignUpInputFieldState extends State<SignUpInputField> {
       margin: const EdgeInsets.all(10),
       child: Column(
         children: [
+          nameField(),
           accountField(),
           passwordField(),
         ],
       ),
+    );
+  }
+
+  nameField() {
+    return TextFormField(
+      controller: widget.nameController,
+      keyboardType: TextInputType.name,
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(15.0),
+            topLeft: Radius.circular(15.0),
+          ),
+        ),
+        hintText: 'Enter name',
+      ),
+      // validator: validateEmail,
+      onChanged: (value) {
+        // bloc.changeEmail(value);
+      },
     );
   }
 
@@ -33,10 +55,7 @@ class SignUpInputFieldState extends State<SignUpInputField> {
       keyboardType: TextInputType.emailAddress,
       decoration: const InputDecoration(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(15.0),
-            topLeft: Radius.circular(15.0),
-          ),
+
         ),
         hintText: 'Enter email',
       ),
@@ -74,3 +93,15 @@ class SignUpInputFieldState extends State<SignUpInputField> {
     );
   }
 }
+
+
+// ElevatedButton(onPressed: () async {
+// CustomUser user = CustomUser(name: 'Vince', id: 'id2');
+// user.subscribeToComic('comic5');
+//
+// DatabaseReference ref = FirebaseDatabase.instance.reference().child("users/" + user.id);
+//
+//
+// await ref.set(user.toJson());
+//
+// }, child: Text('test add user')),

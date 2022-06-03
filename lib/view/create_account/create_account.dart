@@ -16,6 +16,7 @@ class CreateAccountScreen extends StatefulWidget {
 
 class _CreateAccountScreenState extends State<CreateAccountScreen> {
   final createAccountKey = GlobalKey<FormState>();
+  final namelController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -42,11 +43,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           children: [
             Form(
               key: createAccountKey,
-              child: SignUpInputField(emailController, passwordController),
+              child: SignUpInputField(namelController, emailController, passwordController),
             ),
             // Text(loginMessage),
             // Container(margin: const EdgeInsets.only(top: 10)),
-            SignUpButton(auth, emailController, passwordController),
+            SignUpButton(auth, namelController, emailController, passwordController),
             Container(margin: const EdgeInsets.only(top: 10)),
           ],
         ),

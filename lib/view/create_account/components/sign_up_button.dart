@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 
 class SignUpButton extends StatefulWidget {
   final FirebaseAuthentication auth;
+  final TextEditingController nameController;
   final TextEditingController emailController;
   final TextEditingController passwordController;
 
-  const SignUpButton(this.auth, this.emailController, this.passwordController,
+  const SignUpButton(this.auth, this.nameController, this.emailController, this.passwordController,
       {Key? key})
       : super(key: key);
 
@@ -60,18 +61,17 @@ class SignUpButtonState extends State<SignUpButton> {
   }
 
   signUpPressed() {
-    String userId = '';
+    String name = widget.nameController.text;
     String email = widget.emailController.text;
     String password = widget.passwordController.text;
-    widget.auth.createUser(email, password).then((value) {
-      print('Received signed up Account: ${email} - ${password}');
+    widget.auth.createUser(name, email, password).then((value) {
+      print('Received signed up Account: ${name} -  ${email} - ${password}');
       if (value == null) {
         setState(() {
           print('Sign up failed');
           message = 'Fail to create new account';
         });
       } else {
-        userId = value;
         setState(() {
           print('Sign up good');
           message = '';
