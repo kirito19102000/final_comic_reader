@@ -50,13 +50,13 @@ class _SeriesViewComic extends State<SeriesScrollViewComic> {
           return  GestureDetector(
             onTap: (){
               setState(() {
-                _cun=widget.Emty[int.parse(widget.idcomic![index])];
+
               });
 
 
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const DetailScreen(idimg: "0",Emty: false,),),
+                MaterialPageRoute(builder: (context) =>  DetailScreen(idimg: widget.idcomic?[index].toString() ?? "0",Emty: widget.Emty[int.parse(widget.idcomic![index])],),),
               );
 
             },

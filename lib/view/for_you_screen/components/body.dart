@@ -37,6 +37,7 @@ class MyBodyState extends State<MyBody> {
   ];
   List<String> tagComic=[];
   List<String> nameComic=[];
+  List<String> subAthu=[];
   List<bool> hasChapter=[];
   int numComicDb=17;
   int cot=0;
@@ -143,6 +144,8 @@ class MyBodyState extends State<MyBody> {
         });
       }
     }
+
+
 
 
     return Container(
