@@ -147,7 +147,7 @@ class _MyState extends State<MyScreen> {
                 child: Container(
                   child: const Text(
                     "SUBSCRIBED",
-                    style: TextStyle(color: Colors.grey, fontSize: 10),
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ),
               ),
@@ -155,7 +155,7 @@ class _MyState extends State<MyScreen> {
                 child: Container(
                   child: const Text(
                     "DOWNLOADS",
-                    style: TextStyle(color: Colors.grey, fontSize: 10),
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ),
               ),
@@ -163,7 +163,7 @@ class _MyState extends State<MyScreen> {
                 child: Container(
                   child: const Text(
                     "UNLOCKED",
-                    style: TextStyle(color: Colors.grey, fontSize: 10),
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ),
               ),
@@ -171,7 +171,7 @@ class _MyState extends State<MyScreen> {
                 child: Container(
                   child: const Text(
                     "CREATORS",
-                    style: TextStyle(color: Colors.grey, fontSize: 10),
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ),
               ),
@@ -179,7 +179,7 @@ class _MyState extends State<MyScreen> {
                 child: Container(
                   child: const Text(
                     "COMMENTS",
-                    style: TextStyle(color: Colors.grey, fontSize: 10),
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ),
               ),

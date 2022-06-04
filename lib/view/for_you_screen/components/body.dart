@@ -163,16 +163,16 @@ class MyBodyState extends State<MyBody> {
 
           const Padding(padding: EdgeInsets.only(top: 10)),
           TitleWithMoreBtn(
-            text: "My Series",
+            text: "My Subscriptions",
             press: () {},
           ),
           SeriesScrollViewComic(idcomic: user.subscribedComics?.toList(),Name: nameComic,Emty: hasChapter,imgURL: imgUrl,),
           const Padding(padding: EdgeInsets.only(top: 10)),
-
           TitleWithMoreBtn(
-            text: "Comic",
+            text: "All Comics",
             press: () {},
           ),
+          const Padding(padding: EdgeInsets.only(top: 5)),
           DailyComicGridView(
             imgURL: imgUrl,tag: tagComic,name: nameComic,
             itemNum: 17,Emty: hasChapter,

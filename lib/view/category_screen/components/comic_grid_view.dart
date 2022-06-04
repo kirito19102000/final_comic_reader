@@ -43,15 +43,16 @@ class ComicGridView extends StatelessWidget {
                   children: [
                     Image.network(imgUrl[idTagComic[index]],fit: BoxFit.fitWidth,height: 100),
                     Flexible(
-                      child: new Container(
-                        padding: new EdgeInsets.only(right: 13.0),
-                        child: new Text(
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 12.0),
+                        alignment: Alignment.topCenter,
+                        child: Text(
                           nameComic[idTagComic[index]],
                           overflow: TextOverflow.ellipsis,
-                          style: new TextStyle(
+                          style: const TextStyle(
                             fontSize: 13.0,
                             fontFamily: 'Roboto',
-                            color: new Color(0xFF212121),
+                            color: Color(0xFF212121),
                             fontWeight: FontWeight.bold,
                           ),
                         ),

@@ -46,7 +46,7 @@ class TitleWithMoreBtn extends StatelessWidget {
             Text(
               text,
               style: const TextStyle(
-                fontSize: 17,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -22,7 +22,6 @@ class _CategoryState extends State<CategoryScreen> {
         title: Text("Category",style: TextStyle(color: Colors.black),),
         backgroundColor: Colors.white,
 
-
         //backgroundColor: Colors.purple,
       ),
       body: GenresComic(),
