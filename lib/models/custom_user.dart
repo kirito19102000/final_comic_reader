@@ -1,19 +1,23 @@
 class CustomUser {
   final String id;
   String name;
-  List<String> subscribedComics = [];
+  List<String>? subscribedComics = [];
 
-  CustomUser({required this.id, required this.name});
-
-  void subscribeToComic(String comicId) {
-    subscribedComics.add(comicId);
-  }
+  CustomUser({required this.id, required this.name, this.subscribedComics});
 
   Map<String, dynamic> toJson() {
     return {
       'name': name,
       'subscribedComics': subscribedComics,
     };
+  }
+
+  void subscribeToComic(String comicId) {
+    subscribedComics?.add(comicId);
+  }
+
+  void unsubscribeComic(String comicId) {
+    subscribedComics?.remove(comicId);
   }
 
   @override
