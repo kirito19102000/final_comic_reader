@@ -56,12 +56,11 @@ class _Daily extends State<DailyComicGridView> {
                 color: Colors.white,
                 child: Column(
                   children: [
-
                     Image.network(widget.imgURL[index],
                         fit: BoxFit.fitWidth, height: 100),
                     Flexible(
                       child: Container(
-                        margin: const EdgeInsets.only(left: 27),
+                        margin: const EdgeInsets.only(left: 30),
                         alignment: Alignment.centerLeft,
                         // padding: const EdgeInsets.only(right: 13.0),
                         child: Text(
