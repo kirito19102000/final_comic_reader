@@ -5,53 +5,61 @@
 // // gestures. You can also use WidgetTester to find child widgets in the widget
 // // tree, read text, and verify that the values of widget properties are correct.
 //
-import 'package:final_comic_reader/models/custom_user.dart';
-import 'package:final_comic_reader/view/app.dart';
-import 'package:flutter/material.dart';
+import 'package:final_comic_reader/models/chapter.dart';
+import 'package:final_comic_reader/models/comic.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:firebase_core/firebase_core.dart';
-
-import 'package:final_comic_reader/main.dart';
 
 void main() {
-  testWidgets('Create user in firestore', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    // await tester.pumpWidget(const App());
+  test('Model Comic and Chapter test', () {
+    Chapter chapter = Chapter(name: 'Pilot', links: ['link1.com', 'link2.com']);
+    var chapterJson = chapter.toJson();
+    // print(chapterJson);
+    expect(chapterJson['Name'], 'Pilot');
+    expect(chapterJson['Links'][1], 'link2.com');
+    expect(Chapter.fromJson(chapterJson).links?[1], 'link2.com');
+    // print(Chapter.fromJson(chapterJson));
 
-    late FirebaseFirestore db;
+    Comic comic = Comic(
+        name: 'Beelze',
+        image: 'somelink.com',
+        categories: ['action', 'comedy'],
+        chapters: [chapter, chapter]);
+    var comicJson = comic.toJson();
 
-    Firebase.initializeApp().whenComplete(() {
-      db = FirebaseFirestore.instance;
-    });
-    // WidgetsFlutterBinding.ensureInitialized();
-    // await Firebase.initializeApp();
-
-    CustomUser user = CustomUser(name: 'Vince', id: 'id1');
-
-    db.collection("users").add(user.toJson()).then((DocumentReference doc) =>
-        print('DocumentSnapshot added with ID: ${doc.id}'));
-    int lenDB = 0;
-    await db.collection("users").get().then((event) {
-      lenDB = event.docs.length;
-      for (var doc in event.docs) {
-        print("${doc.id} => ${doc.data()}");
-      }
-    });
-
-    expect(lenDB, 2);
+    // print(comicJson);
+    expect(comicJson['Category'][1], 'comedy');
+    expect(comicJson['Image'], 'somelink.com');
+    expect(comicJson['Chapters'].length, 2);
+    expect(comicJson['Chapters'][0]['Links'][0], 'link1.com');
+    expect(Comic.fromJson(comicJson).categories?[0], 'action');
+    expect(Comic.fromJson(comicJson).chapters?[1].links?[1], 'link2.com');
+    // print(Comic.fromJson(comicJson));
   });
 }
 
-// // Verify that our counter starts at 0.
-// expect(find.text('0'), findsOneWidget);
-// expect(find.text('1'), findsNothing);
+// testWidgets('Create user in firestore', (WidgetTester tester) async {
+//   // Build our app and trigger a frame.
+//   // await tester.pumpWidget(const App());
 //
-// // Tap the '+' icon and trigger a frame.
-// await tester.tap(find.byIcon(Icons.add));
-// await tester.pump();
+//   late FirebaseFirestore db;
 //
-// // Verify that our counter has incremented.
-// expect(find.text('0'), findsNothing);
-// expect(find.text('1'), findsOneWidget);
+//   Firebase.initializeApp().whenComplete(() {
+//     db = FirebaseFirestore.instance;
+//   });
+//   // WidgetsFlutterBinding.ensureInitialized();
+//   // await Firebase.initializeApp();
+//
+//   CustomUser user = CustomUser(name: 'Vince', id: 'id1');
+//
+//   db.collection("users").add(user.toJson()).then((DocumentReference doc) =>
+//       print('DocumentSnapshot added with ID: ${doc.id}'));
+//   int lenDB = 0;
+//   await db.collection("users").get().then((event) {
+//     lenDB = event.docs.length;
+//     for (var doc in event.docs) {
+//       print("${doc.id} => ${doc.data()}");
+//     }
+//   });
+//
+//   expect(lenDB, 2);
+// });
