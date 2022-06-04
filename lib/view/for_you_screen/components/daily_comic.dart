@@ -59,28 +59,35 @@ class _Daily extends State<DailyComicGridView>{
                 child: Column(
                   children: [
                     Image.network(widget.imgURL[index],fit: BoxFit.fitWidth,height: 100),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          RichText(
-                              text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: widget.tag[index]+"\n",
-                                      style: TextStyle(color: Colors.grey,fontSize: 10),
-                                    ),
-                                    TextSpan(
-                                      text: widget.name[index]+"\n",
-                                      style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 10),
-                                    ),
 
-                                  ]
-                              )
-                          )
-                        ],
+                    Flexible(
+                      child: new Container(
+                        padding: new EdgeInsets.only(right: 13.0),
+                        child: new Text(
+                          widget.tag[index],
+                          overflow: TextOverflow.ellipsis,
+                          style: new TextStyle(
+                            fontSize: 10.0,
+                            fontFamily: 'Roboto',
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      child: new Container(
+                        padding: new EdgeInsets.only(right: 13.0),
+                        child: new Text(
+                          widget.name[index],
+                          overflow: TextOverflow.ellipsis,
+                          style: new TextStyle(
+                            fontSize: 13.0,
+                            fontFamily: 'Roboto',
+                            color: new Color(0xFF212121),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ],

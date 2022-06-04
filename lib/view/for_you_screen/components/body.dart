@@ -16,6 +16,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../../home_screen/home_screen.dart';
 import 'search_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:final_comic_reader/models/custom_user.dart';
+import 'package:final_comic_reader/shared/firebase_authentication.dart';
 
 final _db =  FirebaseDatabase.instance.reference();
 
@@ -45,9 +48,49 @@ class MyBodyState extends State<MyBody> {
   int _currentIndex = 0;
   int count=0;
 
+  late String uid;
+
+  // late String username;
+  late FirebaseAuth auth;
+  late FirebaseAuthentication _authentication;
+  late DatabaseReference ref;
+
+
+  late String username;
+  late List<String> comicList;
+
+
 
   @override
+  void initState() {
+    Firebase.initializeApp().whenComplete(() async {
+      _authentication = FirebaseAuthentication();
+      setState(() {});
+    });
+
+    super.initState();
+  }
+  CustomUser user = CustomUser(id: '0', name: 'Anonymous');
   Widget build(BuildContext context) {
+
+    auth = FirebaseAuth.instance;
+    ref = FirebaseDatabase.instance.reference();
+    uid = auth.currentUser?.uid ?? '0';
+
+    _db.child('Users/' + uid).onValue.listen((event) {
+      Map<String?, dynamic> userJson =
+      Map<String?, dynamic>.from(event.snapshot.value);
+      username = userJson['name'] ?? 'Anonymous';
+      if (userJson['subscribedComics'] == null) {
+        comicList = [];
+      } else {
+        comicList = List.of(userJson['subscribedComics'].cast<String>());
+      }
+      CustomUser currentUser = CustomUser(id: uid, name: username);
+      currentUser.subscribedComics = comicList;
+      user = currentUser;
+    });
+
 
 
 
@@ -59,9 +102,6 @@ class MyBodyState extends State<MyBody> {
       });
 
     });
-
-
-
 
     if (imgUrl.length<numComicDb.toInt()){
       for (var i = 0; i < numComicDb.toInt(); i++) {
@@ -105,11 +145,6 @@ class MyBodyState extends State<MyBody> {
     }
 
 
-
-
-
-
-
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -122,12 +157,13 @@ class MyBodyState extends State<MyBody> {
           ComicCarousel(numComic: 10,hasChapter: hasChapter,Name: nameComic,imgURL: imgUrl,),
 
 
+
           const Padding(padding: EdgeInsets.only(top: 10)),
           TitleWithMoreBtn(
             text: "My Series",
             press: () {},
           ),
-          SeriesScrollViewComic(size: size),
+          SeriesScrollViewComic(idcomic: user.subscribedComics?.toList(),Name: nameComic,Emty: hasChapter,imgURL: imgUrl,),
           const Padding(padding: EdgeInsets.only(top: 10)),
 
           TitleWithMoreBtn(
@@ -136,7 +172,7 @@ class MyBodyState extends State<MyBody> {
           ),
           DailyComicGridView(
             imgURL: imgUrl,tag: tagComic,name: nameComic,
-            itemNum: 9,Emty: hasChapter,
+            itemNum: 17,Emty: hasChapter,
           ),
 
 
@@ -157,187 +193,8 @@ class MyBodyState extends State<MyBody> {
 
           //}, child: Text("up")),
 
-          ScrollViewRecomedNewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
 
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          TitleWithMoreBtn(
-            text: "Top Completed Series",
-            press: () {},
-          ),
-          ScrollViewComic(size: size),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          TitleWithMoreBtn(
-            text: "Top Series",
-            press: () {},
-          ),
-          Container(
-            height: 400,
-            child: Stack(
-              children: [
-                CarouselSlider(
-                  options: CarouselOptions(
-                    enableInfiniteScroll: false,
-                    aspectRatio: 1,
-                    enlargeCenterPage: false,
-                    autoPlay: false,
-                    onPageChanged: (index, other) {
-                      setState(() {
-                        _currentIndex = index;
-                        print(_currentIndex);
-                      });
-                    },
-                  ),
-                  items: imgUrl.map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          child: GridView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: 5,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 1,
-                                    mainAxisSpacing: 5,
-                                    crossAxisSpacing: 2,
-                                    childAspectRatio: 6),
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DetailScreen(idimg: "0",Emty: false,),),
-                                  );
-                                },
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        index.toString(),
-                                        style: const TextStyle(
-                                            color: Colors.green, fontSize: 20),
-                                      ),
-                                      Card(
-                                        elevation: 4,
-                                        child: Image.network(
-                                          products[index].imageURL,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Column(
-                                        children: [
-                                          Text(
-                                            products[index].title,
-                                            style: const TextStyle(
-                                                color: Colors.black),
-                                          ),
-                                          Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text(
-                                              products[index].tag,
-                                              style: const TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 10),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                            scrollDirection: Axis.vertical,
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(kDefaultPadding / 2),
-          ),
-          TitleWithMoreBtn(
-            text: "All Time Favorties ",
-            press: () {},
-          ),
-          Container(
-            height: 250,
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    CarouselSlider(
-                      options: CarouselOptions(
-                        enableInfiniteScroll: false,
-                        aspectRatio: 18 / 8,
-                        enlargeCenterPage: true,
-                        autoPlay: true,
-                        onPageChanged: (index, other) {
-                          _currentIndex = index;
-                          setState(() {});
-                        },
-                      ),
-                      items: imgUrl.map((i) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Container(
-                                width: double.infinity,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 5.0),
-                                child: GestureDetector(
-                                    child: Image.network(i, fit: BoxFit.fill),
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const DetailScreen(idimg: "0",Emty: false,),),
-                                      );
-                                    }));
-                          },
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: [
-                      const Text(
-                        "Name",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      const Text(
-                        "\t\tdata",
-                        style: TextStyle(color: Colors.green),
-                      )
-                    ],
-                  ),
-                ),
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                )
-              ],
-            ),
-          ),
+
 
           const AlignText(
             title: "Genres",
