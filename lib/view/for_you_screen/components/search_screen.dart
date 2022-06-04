@@ -3,6 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../details_screen/detail_screen.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+
+final _db =  FirebaseDatabase.instance.reference();
 
 class SearchScreen extends StatefulWidget {
 
@@ -40,13 +44,14 @@ class _SearchScreenState extends State<SearchScreen>{
     'Uratarou',
     'Gan Kon',
     'Ore To Kawazu-San No Isekai Hourouki'];
-  List<int> idcomi=[1,2,3,4,5,6,7,8,9,10,12,13,14,15,16];
-  List<String>? searchc;
+  List<int> ID=[0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16];
+
+
 
   TextEditingController? _textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-
+    List<int> idComic=[];
 
 
     // TODO: implement build
@@ -68,28 +73,33 @@ class _SearchScreenState extends State<SearchScreen>{
           ),
           onChanged: (value){
             setState(() {
-              searchc =Name.where((element) => element.contains(value.toLowerCase())).toList();
 
+
+              for (var i=0;i<widget.NameComic.length;i++){
+                if(widget.NameComic[i].toLowerCase().contains(value.toLowerCase())){
+                  idComic.add(i);
+                }
+              }
+              ID=idComic;
+              idComic=[];
             });
+
+
           },
         ),
         Expanded(child: ListView.builder(
-            itemCount: _textEditingController!.text.isNotEmpty
-            ?searchc!.length
-            :Name.length,
+            itemCount: ID.length,
             itemBuilder: (context,index){
               return ListTile(
-                leading: Image.network(widget.imgURL[index],fit: BoxFit.cover,),
-                title: Text(_textEditingController!.text.isNotEmpty
-                    ?searchc![index]
-                    :Name[index]),
+                leading: Image.network(widget.imgURL[ID[index]],fit: BoxFit.cover,),
+                title: Text(widget.NameComic[ID[index]]),
                 onTap: (){
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       // TODO correct linking to each detail page
                       // get comic id and detail screen receives id
-                      builder: (context) => DetailScreen(idimg: index.toString(),Emty: widget.Emty[index],),
+                      builder: (context) => DetailScreen(idimg: ID[index].toString(),Emty: widget.Emty[ID[index]],),
                     ),
                   );
                 },
