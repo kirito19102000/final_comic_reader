@@ -2,95 +2,89 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../models/products.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../details_screen/detail_screen.dart';
 
-class SubscribedComicGridView extends StatelessWidget {
+class SubscribedComicGridView extends StatefulWidget {
   const SubscribedComicGridView({
     Key? key,
-    required this.itemNum,
-  }) : super(key: key);
-  final int itemNum;
+    required this.Emty,
+    required this.Name,
+    required this.idcomic,
+    required this.imgURL
 
+  }) : super(key: key);
+  final List <String>Name,imgURL;
+  final List <bool> Emty;
+  final List <String>?idcomic;
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _SubscribedComicGridView();
+  }
+
+
+
+}
+
+class _SubscribedComicGridView extends State<SubscribedComicGridView>{
   @override
   Widget build(BuildContext context) {
     return Container(
       child:  GridView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: itemNum,
+        itemCount: widget.idcomic?.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1,mainAxisSpacing: 5,crossAxisSpacing: 2,childAspectRatio: 6),
         itemBuilder: (context,index){
-          return SubscribedComicView(imgURL: products[index].imageURL,title: products[index].title,creators: products[index].creators,lastup: products[index].lastup,);
+          return GestureDetector(
+            onTap: (){
+              setState(() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  DetailScreen(idimg: widget.idcomic?[index].toString() ?? "0",Emty: widget.Emty[int.parse(widget.idcomic![index])],),),
+                );
+              });
+            },
+            child: Container(
+              child: Row(
+                children: [
+                  Card(
+                    elevation: 5,
+                    child: Container(
+                      height: 140.0,
+                      width: 80,
+                      color: Colors.green,
+                      child:  Image.network(widget.imgURL[int.parse(widget.idcomic![index])],fit: BoxFit.fitWidth,height: 120,),
+
+                    ),
+                  ),
+
+                  Flexible(
+                    child: new Container(
+                      padding: new EdgeInsets.only(left: 13.0),
+                      child: new Text(
+                        widget.Name[int.parse(widget.idcomic![index])],
+                        overflow: TextOverflow.ellipsis,
+                        style: new TextStyle(
+                          fontSize: 15.0,
+                          fontFamily: 'Roboto',
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+          );
         },
         scrollDirection: Axis.vertical,
       ),
     );
   }
+
 }
 
-class SubscribedComicView extends StatelessWidget {
-  const SubscribedComicView({
-    Key? key,
-    required this.creators,
-    required this.title,
-    required this.imgURL,
-    required this.lastup
-  }) : super(key: key);
-  final String imgURL,title,creators,lastup;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){
-        print("on tap");
-      },
-      child: Container(
-        child: Row(
-          children: [
-            Container(width: 100,
-              child: Image.network(imgURL),),
-            Container(
-              margin: EdgeInsets.only(left: kDefaultPadding
-              ),
-              child: Column(
-                children: [
-                  RichText(
-                      text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: title+"\n",
-                              style: TextStyle(color: Colors.black,fontSize: 15),
-                            ),
-                            TextSpan(
-                              text: creators+"\n",
-                              style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey,fontSize: 10),
-                            ),
-                            TextSpan(
-                              text: lastup+"\n",
-                              style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey,fontSize: 10),
-                            ),
-                          ]
-                      )
-                  )
-                ],
-              ),
-            ),
-            Spacer(),
-            Container(
-              margin: EdgeInsets.only(right: kDefaultPadding),
-              child: IconButton(
-                icon: const FaIcon(
-                  FontAwesomeIcons.bell,
-                  color: Colors.green,
-                  size: 30,
-                ),
-                tooltip: 'Search',
-                onPressed: () {},
-              ),)
-
-
-          ],
-        ),
-      ),
-    );
-  }
-}

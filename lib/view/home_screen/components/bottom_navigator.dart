@@ -27,10 +27,7 @@ class BottomNavigator extends StatelessWidget {
           icon: Icon(Icons.grid_view),
           label: 'CATEGORY',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.auto_stories_outlined),
-          label: 'CANVAS',
-        ),
+
         BottomNavigationBarItem(
           icon: Icon(Icons.person_outline),
           label: 'MY',

@@ -26,7 +26,7 @@ class HomeScreenState extends State<HomeScreen> {
   List<Widget> tabs = [
     ForYouScreen(),
     CategoryScreen(),
-    CanvasScreen(),
+
     MyScreen(),
     MoreScreen(),
   ];
